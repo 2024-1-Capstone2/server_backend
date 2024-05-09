@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<!--
+// v0 by Vercel.
+// https://v0.dev/t/3S1R3uQwYwS
+-->
+
+<div class="bg-white p-8">
+  <div class="flex flex-col items-center space-y-8">
+    <div class="text-center">
+      <img
+        alt="Incheon Airport Logo"
+        class="mb-4"
+        height="50"
+        src="/placeholder.svg"
+        width="200"
+        style="aspect-ratio: 200 / 50; object-fit: cover;"
+      />
+      <h1 class="text-2xl font-bold">HAND BRIDGE</h1>
+      <p class="text-sm mt-1">미래를 선도하는 스마트 공항 인천 국제공항 통역 서비스</p>
+      <p class="text-sm mt-1">Foreign sign language interpretation service</p>
+      <p class="text-sm mt-1">外语手语翻译服务</p>
+    </div>
+    <div class="flex justify-center items-center space-x-4">
+      <div class="flex flex-col items-center">
+        <div class="border-4 border-[#00acee] rounded-full p-1">
+          <img
+            alt="Service Avatar"
+            class="rounded-full"
+            height="100"
+            src="/placeholder.svg"
+            width="100"
+            style="aspect-ratio: 100 / 100; object-fit: cover;"
+          />
+        </div>
+        <p class="text-center mt-4">카메라 보고 언어를 말해라.</p>
+        <p class="text-center">카메라 보고 언어를 말해라.</p>
+      </div>
+      <div class="bg-black w-[500px] h-[300px] flex justify-center items-center">
+        <span class="text-white font-bold text-6xl">CAM</span>
+      </div>
+    </div>
+    <div class="flex justify-between w-full max-w-4xl">
+      <div class="bg-white shadow-lg border rounded-xl p-6 w-[300px]">
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold text-lg">Video service</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+        </div>
+        <p class="text-sm mt-2">Follow the instructions looking at the camera screen</p>
+        <p class="text-sm">Please use sign language.</p>
+      </div>
+      <div class="bg-white shadow-lg border rounded-xl p-6 w-[300px]">
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold text-lg">语言服务</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+          </svg>
+        </div>
+        <p class="text-sm mt-2">按照摄像机屏幕</p>
+        <p class="text-sm">予言识别手势语</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+      const socket = new WebSocket('ws://localhost:8000/ws/flutter/');
+</script>
+</body>
+</html>

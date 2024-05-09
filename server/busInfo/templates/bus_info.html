@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bus Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Bus Information</h1>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Departure Time</th>
+                    <th>Company</th>
+                    <th>Grade</th>
+                    <th>Adult Fare</th>
+                    <th>Child Fare</th>
+                    <th>Student Fare</th>
+                    <th>Available Seats</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in bus_info_list %}
+                <tr>
+                    <td>{{ info.0 }}</td>
+                    <td>{{ info.1 }}</td>
+                    <td>{{ info.2 }}</td>
+                    <td>{{ info.3 }}</td>
+                    <td>{{ info.4 }}</td>
+                    <td>{{ info.5 }}</td>
+                    <td>{{ info.6 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

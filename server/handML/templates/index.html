@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hand Pose Detection</title>
+  <style>
+  #video {
+    display: none;
+  }
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <video id="video" autoplay></video>
+  <canvas id="output"></canvas>
+  <script>
+    const videoElement = document.getElementById('video');
+    const canvasElement = document.getElementById('output');
+    const canvasCtx = canvasElement.getContext('2d');
+
+    // Canvas 크기를 브라우저 창의 크기에 맞게 조절
+    function resizeCanvas() {
+      canvasElement.width = window.innerWidth;
+      canvasElement.height = window.innerHeight;
+    }
+
+    // 브라우저 창의 크기가 변경될 때마다 canvas 크기를 업데이트
+    window.addEventListener('resize', resizeCanvas);
+
+    // 페이지 로드 시 canvas 크기를 초기화
+    window.addEventListener('load', resizeCanvas);
+
+    function onResults(results) {
+      canvasCtx.save();
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+      if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+          drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+          drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+
+          // Send hand landmarks data to Django server via WebSocket
+          const handData = landmarks.map(landmark => [landmark.x, landmark.y, landmark.z]);
+          sendDataToServer(handData);
+        }
+      }
+      canvasCtx.restore();
+    }
+
+    function sendDataToServer(data) {
+      socket.send(JSON.stringify(data));
+    }
+
+    const hands = new Hands({locateFile: (file) => {
+      return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+    }});
+    hands.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5
+    });
+    hands.onResults(onResults);
+
+    const camera = new Camera(videoElement, {
+      onFrame: async () => {
+        await hands.send({image: videoElement});
+      },
+      width: 640,
+      height: 480
+    });
+    camera.start();
+
+    // WebSocket 연결 열기
+    const socket = new WebSocket('ws://localhost:8000/ws/hand_data/');
+  </script>
+</body>
+</html>
