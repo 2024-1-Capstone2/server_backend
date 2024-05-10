@@ -3,6 +3,7 @@ import numpy as np
 from django.conf import settings
 import mediapipe as mp
 import time
+import tensorflow as tf
 
 actions = [
     # 기본 단어
@@ -74,8 +75,8 @@ def detect_action(hand_data):
     # 위에서 구한 각도값으로 input 데이터 생성
     input_data = np.expand_dims(np.array(seq[-seq_length:], dtype=np.float32), axis=0)
 
-    # input 데이터로 예측값 구하기
-    y_pred = model.predict(input_data).squeeze()
+    # input 데이터로 예측값 구하기, verbose 옵션으로 진행바 로그 관리
+    y_pred = model.predict(input_data, verbose = 0).squeeze()
 
     i_pred = int(np.argmax(y_pred))
     conf = y_pred[i_pred]

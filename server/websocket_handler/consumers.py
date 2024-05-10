@@ -32,7 +32,6 @@ class FlutterCommunicator(AsyncWebsocketConsumer):
             data = json.loads(text_data)
         except json.JSONDecodeError:
             return
-        print(f"Received data: {data}")
         upperLevel = data['upperLevel']
         lowerLevel = data['lowerLevel']
 
@@ -46,15 +45,11 @@ class FlutterCommunicator(AsyncWebsocketConsumer):
             pass
         elif upperLevel == 'multiLanguage':
             # 여기는 언어 선택
-            message = change_language_code(lowerLevel)
-            print(f"Message: {message}")
-            data = {
-                "message": "환영합니다."
-            }
-            json_string = json.dumps(data, ensure_ascii=False)
+            data = change_language_code(lowerLevel)
+            print(f"Message: {data}")
+            message = data['message']
+            json_string = json.dumps(message, ensure_ascii=False)
             await self.send(text_data=json_string)
-
-
 
 # 손관절 데이터 수집
 class JavaScriptCommunicator(AsyncWebsocketConsumer):
@@ -92,13 +87,11 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
                 pass
             elif action is not None:
                 self.action_seq.append(action)
-            print(action)
 
         if time.time() - self.start_time > 5:
             if action :
                 self.recognized_actions.append(action)
                 self.all_recognized_actions.append(action)
-            print(f"Sent actions: {action}")
             self.action_seq = []
             self.start_time = time.time()
             self.last_action = None

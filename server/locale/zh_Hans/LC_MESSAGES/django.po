@@ -32,8 +32,8 @@ msgstr ""
 
 #: multiLanguage/utils.py:13
 msgid "Welcome to my site."
-msgstr "환영합니다."
+msgstr "欢迎来到我的网站。"
 
 #: multiLanguage/views.py:10
 msgid "Please choose a language by looking at the camera."
-msgstr "카메라를 보고 언어를 선택해주세요."
+msgstr "请看摄像头并选择语言。"
