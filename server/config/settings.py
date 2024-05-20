@@ -37,8 +37,17 @@ SECRET_KEY = 'django-insecure-poo4g_-)(nw3vk_i19s=n+bqzcia_ycm@daqfe4%#2#igj#jx#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+# CORS 설정
+CORS_ORIGIN_ALLOW_ALL=True
 
+ALLOWED_HOSTS = ['*']
+
+# 웹 소켓 레이어 추가
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 # Application definition
 
@@ -51,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders', # CORS 추가
     'handML.apps.HandmlConfig',
     'busInfo.apps.BusinfoConfig',
     'refund.apps.RefundConfig',
@@ -59,6 +69,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS 관련 추가 (가장 상단에 위치)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',

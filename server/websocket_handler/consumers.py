@@ -3,8 +3,11 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from handML.detection import detect_action
 from multiLanguage.utils import change_language_code
+from channels.layers import get_channel_layer
 import time
 import ast
+from asgiref.sync import async_to_sync
+
 
 '''
 refundCommunicator: 환불 정보를 전달하는 웹소켓 커넥터
@@ -20,9 +23,25 @@ class FlutterCommunicator(AsyncWebsocketConsumer):
 
     async def connect(self):
         await self.accept()
+        # 연결 시 'flutter_group' 그룹에 가입합니다.
+        await self.channel_layer.group_add(
+            'flutter_group',
+            self.channel_name
+        )
 
     async def disconnect(self, close_code):
-        pass
+        # 연결 종료 시 'flutter_group' 그룹에서 탈퇴합니다.
+        await self.channel_layer.group_discard(
+            'flutter_group',
+            self.channel_name
+        )
+
+    async def flutter_message(self, event):
+        message = event['message']
+        # 메시지를 클라이언트에게 보냅니다.
+        await self.send(text_data=json.dumps({
+            'message': message
+        }))
 
     async def send_data(self, data):
         pass
@@ -64,9 +83,16 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
 
     async def connect(self):
         await self.accept()
+        await self.channel_layer.group_add(
+            'javaScript_group',
+            self.channel_name
+        )
 
     async def disconnect(self, close_code):
-        pass
+        await self.channel_layer.group_discard(
+            'javaScript_group',
+            self.channel_name
+        )
 
     async def send_data(self, data=None):
         pass
@@ -95,9 +121,22 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
             self.action_seq = []
             self.start_time = time.time()
             self.last_action = None
-
-        if len(self.all_recognized_actions) > 0:
             print(f"Recognized actions: {self.all_recognized_actions}")
+            channel_layer = get_channel_layer()
+            await channel_layer.group_send(
+                'flutter_group',
+                {
+                    'type': 'flutter_message',
+                    'message': str(self.all_recognized_actions)
+                }
+            )
+
+    async def javaScript_message(self, event):
+        message = event['message']
+        # 메시지를 클라이언트에게 보냅니다.
+        await self.send(text_data=json.dumps({
+            'message': message
+        }))
 
 class LanguageCommunicator(AsyncWebsocketConsumer):
 

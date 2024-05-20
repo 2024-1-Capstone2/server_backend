@@ -7,9 +7,9 @@ def index(request):
     translation.activate(language_code)
     camera_message = _("Please choose a language by looking at the camera.")
     return render(request, 'language.html', {'camera_message': camera_message})
-def change_language_mode(request):
+def change_language_mode(request, upperLevel, lowerLevel):
     # 후에 templates 렌더링과 데이터 넣어주기.
-    translation.activate('zh-hans')
+    translation.activate(lowerLevel)
     camera_message = _("Please choose a language by looking at the camera.")
-    request.session['language_code'] = 'zh-hans'
-    return render(request, 'language.html', {'camera_message': camera_message})
+    request.session['language_code'] = lowerLevel
+    return render(request, 'language_request.html', {'camera_message': camera_message})

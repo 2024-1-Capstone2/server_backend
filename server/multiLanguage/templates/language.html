@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +15,6 @@
 <div class="bg-white p-8">
   <div class="flex flex-col items-center space-y-8">
     <div class="text-center">
-      <img
-        alt="Incheon Airport Logo"
-        class="mb-4"
-        height="50"
-        src="/placeholder.svg"
-        width="200"
-        style="aspect-ratio: 200 / 50; object-fit: cover;"
-      />
       <h1 class="text-2xl font-bold">HAND BRIDGE</h1>
       <p class="text-sm mt-1">미래를 선도하는 스마트 공항 인천 국제공항 통역 서비스</p>
       <p class="text-sm mt-1">Foreign sign language interpretation service</p>
@@ -34,7 +27,7 @@
             alt="Service Avatar"
             class="rounded-full"
             height="100"
-            src="/placeholder.svg"
+            src="{% static 'image/human.png' %}"
             width="100"
             style="aspect-ratio: 100 / 100; object-fit: cover;"
           />
