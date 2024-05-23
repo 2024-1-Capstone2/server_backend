@@ -5,3 +5,5 @@ from django.shortcuts import render
 def request_ticket(request):
     return render(request, 'request_ticket.html')
 
+def index(request):
+    return render(request, 'refund_index.html')

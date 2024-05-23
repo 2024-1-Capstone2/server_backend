@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'refund.apps.RefundConfig',
     'websocket_handler.apps.WebsocketHandlerConfig',
     'multiLanguage.apps.LanguageConfig',
+    'temp.apps.TempConfig',
+    'ticket.apps.TicketConfig',
 ]
 
 MIDDLEWARE = [

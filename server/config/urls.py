@@ -24,4 +24,6 @@ urlpatterns = [
     path('busInfo/', include('busInfo.urls')),
     path('refund/', include('refund.urls')),
     path('multiLanguage/', include('multiLanguage.urls')),
+    path('temp/', include('temp.urls')),
+    path('ticket/', include('ticket.urls')),
 ]

@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'css/one/global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+  </head>
+  <body>
+    <div
+      class="w-full relative bg-whitesmoke-300 overflow-hidden flex flex-row items-start justify-start py-[1.562rem] px-[1.187rem] box-border gap-[1.937rem] leading-[normal] tracking-[normal] text-right text-[2.813rem] text-black font-inter mq450:gap-[0.938rem] mq1275:flex-wrap"
+    >
+      <div
+        class="h-[53.125rem] w-[67.313rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full z-[0]"
+      ></div>
+      <div
+        class="h-[31.25rem] w-[56.25rem] relative bg-black hidden max-w-full z-[1]"
+      ></div>
+      <div
+        class="relative tracking-[0.1em] text-white hidden min-w-[7.313rem] z-[2] mq750:text-[2.25rem] mq450:text-[1.688rem]"
+      >
+        CAM
+      </div>
+      <div class="h-[6.25rem] w-[56.25rem] relative hidden max-w-full z-[3]">
+        <div
+          class="absolute top-[0rem] left-[0rem] rounded-31xl bg-darkslateblue-200 w-full h-full"
+        ></div>
+        <div
+          class="absolute h-full top-[0rem] bottom-[0rem] left-[0rem] rounded-[50%] bg-white box-border w-[6.25rem] border-[0px] border-solid border-black"
+        ></div>
+        <img
+          class="absolute top-[1.563rem] left-[1.813rem] w-[3.125rem] h-[3.125rem] object-cover"
+          alt=""
+          src="{% static 'image/one/image-10@2x.png' %}"
+        />
+      </div>
+      <img
+        class="h-[3.125rem] w-[3.125rem] relative object-cover hidden z-[4]"
+        alt=""
+        src="{% static 'image/one/group-21@2x.png' %}"
+      />
+
+      <div
+        class="w-[36.5rem] relative text-[0.938rem] tracking-[0.1em] hidden z-[5]"
+      >
+        <p class="m-0">
+          If the sentence displayed on the screen was not what you intended,
+        </p>
+        <p class="m-0">look at the camera and use the sign word 'again'.</p>
+      </div>
+      <img
+        class="h-[3.125rem] w-[3.125rem] absolute !m-[0] right-[42.313rem] bottom-[3.5rem] object-cover z-[4]"
+        loading="lazy"
+        alt=""
+        src="{% static 'image/one/group-21@2x.png' %}"
+      />
+
+      <div
+        class="w-[26.813rem] flex flex-col items-start justify-start pt-[0.437rem] px-[0rem] pb-[0rem] box-border min-w-[26.813rem] max-w-full text-center text-[1.25rem] mq750:min-w-full mq1275:flex-1"
+      >
+        <div
+          class="self-stretch flex flex-col items-start justify-start gap-[3.25rem] max-w-full mq450:gap-[1.625rem]"
+        >
+          <div
+            class="self-stretch flex flex-row items-start justify-center py-[0rem] px-[1.25rem]"
+          >
+            <div
+              class="flex flex-row items-start justify-start bg-cover bg-no-repeat bg-[top]"
+            >
+              <img
+                class="h-[9.063rem] w-[9.063rem] relative object-cover hidden min-h-[9.063rem]"
+                alt=""
+                src="{% static 'image/one/image-9@2x.png' %}"
+              />
+
+              <img
+                class="h-[9.063rem] w-[9.063rem] relative object-cover z-[1]"
+                loading="lazy"
+                alt=""
+                src="{% static 'image/one/image-9@2x.png' %}"
+              />
+            </div>
+          </div>
+          <div
+            class="self-stretch flex flex-col items-start justify-start gap-[1.875rem] max-w-full"
+          >
+            <div
+              class="self-stretch flex flex-row items-start justify-start relative max-w-full"
+            >
+              <img
+                class="h-[3.125rem] w-[1.344rem] absolute !m-[0] top-[-2.125rem] right-[12.731rem] z-[1]"
+                loading="lazy"
+                alt=""
+                src="{% static 'image/one/polygon-12.svg' %}"
+              />
+
+              <div
+                class="flex-1 rounded-mini bg-white flex flex-row items-start justify-end py-[1rem] px-[2.625rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+              >
+                <div
+                  class="h-[5rem] w-[26.813rem] relative rounded-mini bg-white hidden max-w-full"
+                ></div>
+                <div
+                  class="w-[20.913rem] relative tracking-[0.1em] inline-block shrink-0 max-w-full z-[2] mq450:text-[1rem]"
+                >
+                  <p class="m-0">Would you like to purchase</p>
+                  <p class="m-0">a new ticket?</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="self-stretch rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] px-[0.312rem] box-border max-w-full"
+            >
+              <div
+                class="h-[5rem] w-[26.813rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="flex-1 relative tracking-[0.1em] inline-block max-w-full z-[1] mq450:text-[1rem]"
+              >
+                <p class="m-0">If you would like to issue a ticket,</p>
+                <p class="m-0">please say “ticket issued.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section
+        class="flex-1 flex flex-col items-start justify-start min-w-[44.5rem] min-h-[53.125rem] max-w-full text-right text-[2.813rem] text-white font-inter mq1100:min-w-full"
+      >
+        <div
+          class="self-stretch shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[3.687rem] px-[3.5rem] pb-[2.375rem] box-border gap-[13.562rem] max-w-full z-[3] mq750:gap-[3.375rem] mq1100:gap-[6.75rem] mq1100:pt-[2.375rem] mq1100:px-[1.75rem] mq1100:pb-[1.563rem] mq1100:box-border mq450:gap-[1.688rem] mq450:pt-[1.563rem] mq450:pb-[1.25rem] mq450:box-border"
+        >
+          <div
+            class="w-[68.438rem] h-[53.125rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full"
+          ></div>
+          <div
+            class="w-[60.75rem] h-[31.25rem] flex flex-row items-start justify-end py-[0rem] px-[2.25rem] box-border max-w-full"
+          >
+            <div
+              class="self-stretch flex-1 bg-black flex flex-row items-start justify-center py-[12.25rem] pr-[1.25rem] pl-[1.437rem] box-border max-w-full z-[4] mq450:pt-[7.938rem] mq450:pb-[7.938rem] mq450:box-border"
+            >
+              <div
+                class="h-[31.25rem] w-[56.25rem] relative bg-black hidden max-w-full"
+              ></div>
+              <h1
+                class="m-0 relative text-inherit tracking-[0.1em] font-normal font-inherit inline-block min-w-[7.313rem] z-[5] mq750:text-[2.25rem] mq450:text-[1.688rem]"
+              >
+                CAM
+              </h1>
+            </div>
+          </div>
+          <div
+            class="w-[36.5rem] relative text-[0.938rem] tracking-[0.1em] text-black inline-block max-w-full z-[4]"
+          >
+            <p class="m-0">
+              If the sentence displayed on the screen was not what you intended,
+            </p>
+            <p class="m-0">look at the camera and use the sign word 'again'.</p>
+          </div>
+        </div>
+        <div
+          class="w-[67.375rem] flex flex-row items-start justify-center py-[0rem] px-[1.25rem] box-border max-w-full mt-[-14.5rem]"
+        >
+          <div
+            class="w-[56.25rem] rounded-31xl bg-darkslateblue-200 flex flex-row items-start justify-start max-w-full z-[4]"
+          >
+            <div
+              class="self-stretch w-[56.25rem] relative rounded-31xl bg-darkslateblue-200 hidden max-w-full"
+            ></div>
+            <button
+              class="cursor-pointer [border:none] p-0 bg-[transparent] h-[6.25rem] w-[6.25rem] relative"
+            >
+              <div
+                class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-white box-border w-full h-full z-[1] border-[0px] border-solid border-black"
+              ></div>
+              <img
+                class="absolute top-[1.563rem] left-[1.813rem] w-[3.125rem] h-[3.125rem] object-cover z-[2]"
+                alt=""
+                src="{% static 'image/one/image-10@2x.png' %}"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

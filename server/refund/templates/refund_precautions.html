@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'css/one/global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+  </head>
+  <body>
+    <div
+      class="w-full relative bg-whitesmoke-300 overflow-hidden flex flex-row items-start justify-start pt-[1.625rem] pb-[1.687rem] pr-[1.125rem] pl-[2.125rem] box-border gap-[2.375rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-black font-inter mq450:gap-[1.188rem] mq1275:flex-wrap"
+    >
+      <div
+        class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.375rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
+      >
+        <div
+          class="self-stretch flex flex-col items-start justify-start gap-[2.812rem] max-w-full mq450:gap-[1.375rem]"
+        >
+          <div
+            class="w-[24.938rem] flex flex-row items-start justify-center pt-[0rem] px-[1.25rem] pb-[0.812rem] box-border max-w-full"
+          >
+            <img
+              class="h-[9.063rem] w-[9.063rem] relative object-cover"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/image-9@2x.png' %}"
+            />
+          </div>
+          <div
+            class="self-stretch flex flex-col items-start justify-start py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full"
+          >
+            <div
+              class="self-stretch flex flex-row items-start justify-start relative max-w-full"
+            >
+              <img
+                class="h-[3.125rem] w-[1.25rem] absolute !m-[0] top-[-2.125rem] left-[calc(50%_-_10px)] z-[1]"
+                loading="lazy"
+                alt=""
+                src="{% static 'image/one/hand-shape.svg' %}"
+              />
+
+              <div
+                class="flex-1 rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] pr-[1.062rem] pl-[1.625rem] box-border max-w-full"
+              >
+                <div
+                  class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+                ></div>
+                <div
+                  class="w-[22.313rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+                >
+                  <p class="m-0">If you have a ticket, please tell</p>
+                  <p class="m-0">“Yes” and submit the ticket.</p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="self-stretch rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <p class="m-0">If you do not have a ticket,</p>
+                <p class="m-0">please tell “No”.</p>
+              </div>
+            </div>
+          </div>
+          <textarea
+            class="[border:none] bg-black h-[14.25rem] w-auto [outline:none] self-stretch flex flex-row items-start justify-start py-[6.375rem] px-[11.187rem] box-border font-inter text-[1.25rem] text-white"
+            placeholder="CAM"
+            rows="{11}"
+            cols="{21}"
+          >
+          </textarea>
+        </div>
+      </div>
+      <section
+        class="flex-1 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[2.437rem] pb-[1.812rem] pr-[3.312rem] pl-[3.25rem] box-border gap-[4.375rem] min-w-[44.688rem] max-w-full text-left text-[1.875rem] text-black font-inter mq750:gap-[1.063rem] mq1100:gap-[2.188rem] mq1100:pt-[1.563rem] mq1100:px-[1.625rem] mq1100:pb-[1.25rem] mq1100:box-border mq1100:min-w-full mq450:pt-[1.25rem] mq450:box-border"
+      >
+        <div
+          class="w-[68.75rem] h-[52.938rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full"
+        ></div>
+        <div
+          class="self-stretch flex flex-col items-start justify-start gap-[1.937rem] max-w-full mq750:gap-[0.938rem]"
+        >
+          <header
+            class="flex flex-row items-start justify-start py-[0rem] px-[1.625rem] box-border max-w-full text-right text-[2.188rem] text-black font-inter"
+          >
+            <div
+              class="flex flex-row items-start justify-start gap-[1.562rem] max-w-full"
+            >
+              <img
+                class="h-[5rem] w-[5rem] relative object-cover z-[1]"
+                loading="lazy"
+                alt=""
+                src="{% static 'image/one/refund-1@2x.png' %}"
+              />
+
+              <div
+                class="flex flex-col items-start justify-start pt-[0.875rem] px-[0rem] pb-[0rem] box-border max-w-full"
+              >
+                <h2
+                  class="m-0 relative text-inherit tracking-[0.1em] font-medium font-inherit whitespace-nowrap z-[1]"
+                >
+                  Ticket refund precautions
+                </h2>
+              </div>
+            </div>
+          </header>
+          <div
+            class="self-stretch bg-silver flex flex-row items-end justify-end py-[13.625rem] px-[17.187rem] box-border min-h-[34.25rem] max-w-full z-[1] mq750:py-[8.875rem] mq750:px-[4.25rem] mq750:box-border mq1100:pl-[8.563rem] mq1100:pr-[8.563rem] mq1100:box-border"
+          >
+            <div
+              class="h-[34.25rem] w-[62.188rem] relative bg-silver hidden max-w-full"
+            ></div>
+            <h3
+              class="m-0 w-[23.813rem] relative text-inherit tracking-[0.1em] font-medium font-inherit inline-block shrink-0 max-w-full z-[2] mq750:text-[1.5rem] mq450:text-[1.125rem]"
+            >
+              티켓 환불 안내 사항 &gt; 영어
+            </h3>
+          </div>
+        </div>
+        <footer
+          class="w-[41.688rem] flex flex-row items-start justify-end py-[0rem] px-[0.687rem] box-border max-w-full text-right text-[0.938rem] text-black font-inter"
+        >
+          <div
+            class="flex-1 flex flex-row items-start justify-start gap-[0.687rem] max-w-full mq750:flex-wrap"
+          >
+            <img
+              class="h-[3.125rem] w-[3.125rem] relative object-cover z-[1]"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/group-21@2x.png' %}"
+            />
+
+            <div
+              class="flex-1 flex flex-col items-start justify-start pt-[0.437rem] px-[0rem] pb-[0rem] box-border min-w-[23.75rem] max-w-full mq750:min-w-full"
+            >
+              <div class="self-stretch relative tracking-[0.1em] z-[1]">
+                <p class="m-0">
+                  If the sentence displayed on the screen was not what you
+                  intended,
+                </p>
+                <p class="m-0">
+                  look at the camera and use the sign word 'again'.
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </div>
+  </body>
+</html>
