@@ -3,90 +3,108 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>HAND BRIDGE</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .rounded-full-border {
+          width: 220px;
+          height: 220px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      .rounded-full-border img {
+          aspect-ratio: 100 / 100;
+          object-fit: cover;
+      }
+    </style>
 </head>
-<body>
-<!--
-// v0 by Vercel.
-// https://v0.dev/t/3S1R3uQwYwS
--->
-
+<body class="bg-gray-100">
 <div class="bg-white p-8">
-  <div class="flex flex-col items-center space-y-8">
-    <div class="text-center">
-      <h1 class="text-2xl font-bold">HAND BRIDGE</h1>
-      <p class="text-sm mt-1">미래를 선도하는 스마트 공항 인천 국제공항 통역 서비스</p>
-      <p class="text-sm mt-1">Foreign sign language interpretation service</p>
-      <p class="text-sm mt-1">外语手语翻译服务</p>
-    </div>
-    <div class="flex justify-center items-center space-x-4">
-      <div class="flex flex-col items-center">
-        <div class="border-4 border-[#00acee] rounded-full p-1">
+  <div class="flex justify-between">
+    <!-- 왼쪽 섹션 -->
+    <div class="flex flex-col items-start space-y-4">
+      <div class="text-left">
+        <div class="flex flex-col items-start space-y-2" style="margin-left: -12px;">
+          <img
+            alt="Airport Logo"
+            class="w-[190px] h-[50px]"
+            src="{% static 'image/airportlogo.png' %}"
+          />
+          <img
+            alt="Project Logo"
+            class="h-16"
+            src="{% static 'image/projectlogo.png' %}"
+          />
+        </div>
+        <p class="text-lg font-semibold mt-2">미래를 선도하는 스마트 공항</p>
+        <p class="text-lg font-semibold mt-1">인천 국제공항 통역 서비스</p>
+        <p class="text-sm mt-2">Foreign sign language interpretation service</p>
+        <p class="text-sm mt-2">外语手语翻译服务</p>
+      </div>
+      <div class="flex flex-col items-center justify-end" style="margin-top: 60px;">
+        <div class="border-4 border-[#00abb3] rounded-full p-1 rounded-full-border">
           <img
             alt="Service Avatar"
             class="rounded-full"
-            height="100"
-            src="{% static 'image/human.png' %}"
-            width="100"
-            style="aspect-ratio: 100 / 100; object-fit: cover;"
+            height="145"
+            src="{% static 'image/consultanticon.png' %}"
+            width="145"
           />
         </div>
-        <p class="text-center mt-4">{{camera_message}}</p>
-        <p class="text-center">카메라 보고 언어를 말해라.</p>
-      </div>
-      <div class="bg-black w-[500px] h-[300px] flex justify-center items-center">
-        <span class="text-white font-bold text-6xl">CAM</span>
+        <div class="mt-4" style="margin-top: 20px;">
+          <p class="text-center" style="margin-top: 15px;">카메라를 보고 언어를 선택해주세요</p>
+          <p class="text-center" style="margin-top: 15px;">Please look at the camera and</p>
+          <p class="text-center">say the sign language of your desired language.</p>
+          <p class="text-center" style="margin-top: 15px;">看着相机并说出您想要的语言的手语。</p>
+        </div>
       </div>
     </div>
-    <div class="flex justify-between w-full max-w-4xl">
-      <div class="bg-white shadow-lg border rounded-xl p-6 w-[300px]">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-lg">Video service</h2>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-          </svg>
-        </div>
-        <p class="text-sm mt-2">Follow the instructions looking at the camera screen</p>
-        <p class="text-sm">Please use sign language.</p>
+
+    <!-- 오른쪽 섹션 -->
+    <div class="flex flex-col space-y-4">
+      <div class="bg-black w-[900px] h-[500px] flex justify-center items-center">
+        <video id="camera" class="w-full h-full object-cover" autoplay></video>
       </div>
-      <div class="bg-white shadow-lg border rounded-xl p-6 w-[300px]">
-        <div class="flex items-center justify-between">
-          <h2 class="font-semibold text-lg">语言服务</h2>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
-          >
-            <circle cx="12" cy="12" r="10"></circle>
-          </svg>
+      <div class="flex flex-col items-center space-y-4 mt-8">
+        <p class="text-lg font-semibold" style="color: #9898;">LANGUAGE 语言</p>
+        <div class="flex justify-between w-full space-x-8">
+          <div class="bg-[#EFEFEF] shadow-lg border rounded-xl p-6 w-[400px] h-[200px]">
+            <div class="flex items-center justify-between">
+              <h2 class="font-semibold text-lg">Video service</h2>
+              <div class="w-10 h-10 bg-[#FFFFFF] rounded-full flex items-center justify-center">
+                <span class="font-bold">A</span>
+              </div>
+            </div>
+            <p class="text-sm mt-2" style="margin-top: 50px;">Follow the instructions</p>
+            <p class="text-sm">looking at the camera screen</p>
+            <p class="text-sm">Please use sign language.</p>
+          </div>
+          <div class="bg-[#EFEFEF] shadow-lg border rounded-xl p-6 w-[400px] h-[200px]">
+            <div class="flex items-center justify-between">
+              <h2 class="font-semibold text-lg">视频服务</h2>
+              <div class="w-10 h-10 bg-[#FFFFFF] rounded-full flex items-center justify-center">
+                <span class="font-bold">中</span>
+              </div>
+            </div>
+            <p class="text-sm mt-2" style="margin-top: 50px;">按照说明操作</p>
+            <p class="text-sm">看着相机屏幕</p>
+            <p class="text-sm">请使用手语。</p>
+          </div>
         </div>
-        <p class="text-sm mt-2">按照摄像机屏幕</p>
-        <p class="text-sm">予言识别手势语</p>
       </div>
     </div>
   </div>
 </div>
 <script>
-      const socket = new WebSocket('ws://localhost:8000/ws/flutter/');
+    const video = document.getElementById('camera');
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        });
+    }
 </script>
 </body>
 </html>
