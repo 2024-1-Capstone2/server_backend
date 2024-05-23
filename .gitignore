@@ -6,3 +6,5 @@ data.txt
 start.txt
 bin/
 lib/
+server/handML/model/model_asl.keras:Zone.Identifier
+pyvenv.cfg
