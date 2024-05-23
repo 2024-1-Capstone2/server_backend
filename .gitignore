@@ -1,6 +1,6 @@
 # created by virtualenv automatically
 ../bin
-server/static/
+#server/static/
 server/db.sqlite3
 data.txt
 start.txt
