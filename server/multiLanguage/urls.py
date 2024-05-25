@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:upperLevel>/<str:lowerLevel>', views.change_language_mode, name='change_language_mode'),
+    # path('<str:upperLevel>/<str:lowerLevel>', views.change_language_mode, name='change_language_mode'),
 ]

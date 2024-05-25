@@ -12,6 +12,19 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/config.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <style>
+    #video{
+      display: none;
+    }
+    #output {
+        width: 100%;
+        height: 100%;
+    }
+  </style>
   </head>
   <body>
     <div
@@ -102,18 +115,17 @@
         <div
           class="flex-1 flex flex-col items-start justify-start gap-[1.187rem] min-w-[36.563rem] max-w-full ml-[-0.063rem] text-right text-[2.813rem] text-white mq800:min-w-full mq1150:ml-0"
         >
-          <div
-            class="self-stretch bg-black flex flex-row items-start justify-center pt-[13.75rem] pb-[14.062rem] pr-[1.25rem] pl-[1.562rem] box-border max-w-full mq800:pt-[1.313rem] mq800:pb-[9.125rem] mq800:box-border "
-          >
-            <div
-              class="h-[31.25rem] w-[56.25rem] relative bg-black hidden max-w-full"
-            ></div>
-            <h1
-              class="m-0 relative text-center text-inherit tracking-[0.1em] font-normal font-inherit inline-block min-w-[7.313rem] z-[1] mq800:text-[2.25rem] mq450:text-[1.688rem]"
-            >
-              CAM
-            </h1>
-          </div>
+<!--          <div-->
+<!--            class="self-stretch flex flex-row items-start justify-center pt-[13.75rem] pb-[14.062rem] pr-[1.25rem] pl-[1.562rem] box-border max-w-full mq800:pt-[1.313rem] mq800:pb-[9.125rem] mq800:box-border "-->
+<!--          >-->
+<!--            <div-->
+<!--              class="h-[31.25rem] w-[56.25rem] relative bg-black hidden max-w-full"-->
+<!--            ></div>-->
+            <div class="h-[31.25rem] w-[56.25rem] relative max-w-full">
+              <video id="video" autoplay></video>
+              <canvas id="output"></canvas>
+            </div>
+<!--          </div>-->
           <div
             class="w-[56.25rem] flex items-center justify-center py-[0rem] px-[1.25rem] box-border max-w-full text-[1.25rem] text-darkgray"
           >
@@ -215,9 +227,81 @@
         <div
           class="flex-1 flex flex-row items-start justify-between max-w-full gap-[1.25rem] mq1350:flex-wrap"
         >
-<!--          복붙 여기임-->
         </div>
       </section>
     </div>
+  <script>
+    const videoElement = document.getElementById('video');
+    const canvasElement = document.getElementById('output');
+    const canvasCtx = canvasElement.getContext('2d');
+    function sendDataToServer(data) {
+      socket.send(JSON.stringify(data));
+    }
+
+    const hands = new Hands({locateFile: (file) => {
+      return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+    }});
+    hands.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.5,
+      minTrackingConfidence: 0.5
+    });
+    hands.onResults(onResults);
+
+    const camera = new Camera(videoElement, {
+      onFrame: async () => {
+        await hands.send({image: videoElement});
+      },
+      width: 800,
+      height: 480
+    });
+    camera.start();
+
+    // WebSocket 연결 열기
+    const socket = new WebSocket('ws://localhost:8000/ws/js/');
+
+    // 메시지 이벤트 핸들러 추가
+    // dicsonnect가 아니라 나중에는 해당하는 모듈로 이동시키기.
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        const message = data.message;
+        if (message === 'disconnect') {
+          // 웹소켓 연결 끊기
+          socket.close();
+          // 5초 후에 request_ticket 페이지로 이동
+          setTimeout(function() {
+              window.location.href = 'http://localhost:8000/refund/request_ticket';
+          }, 1000);
+          const messageElement = document.getElementById('message');
+          messageElement.textContent = message;
+        }
+        console.log('http://localhost:8000/' + message);
+        window.location.href = 'http://localhost:8000/' + message;
+    };
+
+    function onResults(results) {
+      canvasCtx.save();
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+      if (results.multiHandLandmarks) {
+        for (const landmarks of results.multiHandLandmarks) {
+          drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+          drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+
+          // Send hand landmarks data to Django server via WebSocket
+          for (const [handId, landmarks] of results.multiHandLandmarks.entries()) {
+            const handData = {
+                "handId" : handId,
+                "landmarks" : landmarks
+            };
+            const jsonString = JSON.stringify(handData);
+            sendDataToServer(jsonString);
+          }
+        }
+      }
+      canvasCtx.restore();
+    }
+  </script>
   </body>
 </html>

@@ -2,7 +2,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from handML.detection import detect_action
-from multiLanguage.utils import change_language_code
+# from multiLanguage.utils import change_language_code
 from channels.layers import get_channel_layer
 import time
 import ast
@@ -10,10 +10,10 @@ from asgiref.sync import async_to_sync
 
 
 '''
-refundCommunicator: 환불 정보를 전달하는 웹소켓 커넥터
-ticketCommunicator: 표 정보를 전달하는 웹소켓 커넥터
-busCommunicator: 버스 정보를 전달하는 웹소켓 커넥터
 flutterCommunicator: Flutter 앱과 통신하는 웹소켓 커넥터
+javaScriptCommunicator: JavaScript 앱과 통신하는 웹소켓 커넥터
+
+
 '''
 
 class FlutterCommunicator(AsyncWebsocketConsumer):
@@ -64,7 +64,7 @@ class FlutterCommunicator(AsyncWebsocketConsumer):
             pass
         elif upperLevel == 'multiLanguage':
             # 여기는 언어 선택
-            data = change_language_code(lowerLevel)
+            # data = change_language_code(lowerLevel)
             print(f"Message: {data}")
             message = data['message']
             json_string = json.dumps(message, ensure_ascii=False)
@@ -104,7 +104,6 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
                 text_data = ast.literal_eval(text_data)
                 hand_data = json.loads(text_data)
             except json.JSONDecodeError:
-                print(f"Invalid JSON data: {text_data}")
                 return
 
             # print(f"Received hand data: {hand_data}")
@@ -113,23 +112,22 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
                 pass
             elif action is not None:
                 self.action_seq.append(action)
-
-        if time.time() - self.start_time > 5:
-            if action :
-                self.recognized_actions.append(action)
-                self.all_recognized_actions.append(action)
-            self.action_seq = []
-            self.start_time = time.time()
-            self.last_action = None
-            print(f"Recognized actions: {self.all_recognized_actions}")
-            channel_layer = get_channel_layer()
-            await channel_layer.group_send(
-                'flutter_group',
-                {
-                    'type': 'flutter_message',
-                    'message': str(self.all_recognized_actions)
-                }
-            )
+                if time.time() - self.start_time > 5:
+                    if action :
+                        self.recognized_actions.append(action)
+                        self.all_recognized_actions.append(action)
+                    self.action_seq = []
+                    self.start_time = time.time()
+                    self.last_action = None
+                    print(f"Recognized actions: {self.all_recognized_actions}")
+                    channel_layer = get_channel_layer()
+                    await channel_layer.group_send(
+                        'flutter_group',
+                        {
+                            'type': 'flutter_message',
+                            'message': str(self.all_recognized_actions)
+                        }
+                    )
 
     async def javaScript_message(self, event):
         message = event['message']
@@ -137,22 +135,3 @@ class JavaScriptCommunicator(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'message': message
         }))
-
-class LanguageCommunicator(AsyncWebsocketConsumer):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.counter = 0
-
-    async def connect(self):
-        await self.accept()
-
-    async def disconnect(self, close_code):
-        pass
-
-    async def send_data(self, data):
-        pass
-
-    async def receive(self, text_data=None, bytes_data=None):
-        await self.send(text_data=json.dumps({'message': 'Data received successfully'}))
-        pass

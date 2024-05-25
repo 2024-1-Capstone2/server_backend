@@ -60,13 +60,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'corsheaders', # CORS 추가
     'handML.apps.HandmlConfig',
     'busInfo.apps.BusinfoConfig',
     'refund.apps.RefundConfig',
     'websocket_handler.apps.WebsocketHandlerConfig',
     'multiLanguage.apps.LanguageConfig',
-    'temp.apps.TempConfig',
     'ticket.apps.TicketConfig',
 ]
 
