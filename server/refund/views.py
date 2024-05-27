@@ -23,7 +23,7 @@ def request_ticket(request):
 
 # 표 소지 여부 yes - 환불 처리 후, 새 표 구매 요청 확인 페이지로 이동
 @api_view(['GET'])
-def ask_buy_ticket(request):
+def ask_buy_new_ticket(request):
     channel_layer = get_channel_layer()
 
     async def async_group_send():
@@ -40,10 +40,30 @@ def ask_buy_ticket(request):
     return Response(status=200)
 
 # 표 소지 여부 no 환불 불가능 페이지로 이동
+@api_view(['GET'])
+def refund_impossible(request):
+    channel_layer = get_channel_layer()
 
+    async def async_group_send():
+        await channel_layer.group_send(
+            'javaScript_group',
+            {
+                'type': 'javaScript_message',
+                'message': str('refund/impossible')
+            }
+        )
+
+    async_to_sync(async_group_send)()
+
+    return Response(status=200)
 
 def index(request):
-    return render(request, 'refund_precautions.html')
+    return render(request, 'refund_request_ticket.html')
 
 def new(request):
-    return render(request, 'refund_new.html')
+    return render(request, 'refund_new_ticket.html')
+
+def impossible(request):
+    return render(request, 'refund_impossible.html')
+
+
