@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -33,16 +34,16 @@
 
               <button class="rectangle-parent6">
                 <div class="frame-child9"></div>
-                <div class="please-board-the">Please board the 7511 bus</div>
+                <div class="please-board-the">{% blocktrans %}Please board the {{ bus_number }} bus{% endblocktrans %}</div>
               </button>
             </div>
             <button class="rectangle-parent7">
               <div class="frame-child10"></div>
-              <div class="at-bus-stop">At bus stop 7A</div>
+              <div class="at-bus-stop">{% blocktrans %}At bus stop {{ bus_stop }}{% endblocktrans %}</div>
             </button>
             <button class="rectangle-parent8">
               <div class="frame-child11"></div>
-              <div class="the-map-will">The map will close after 30s</div>
+              <div class="the-map-will">{% blocktrans %}The map will close after 30s{% endblocktrans %}</div>
             </button>
           </div>
         </div>
@@ -81,11 +82,10 @@
             <div class="if-the-sentence-displayed-on-t-container">
               <div class="if-the-sentence-container3">
                 <p class="if-the-sentence3">
-                  If the sentence displayed on the screen was not what you
-                  intended,
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
                 </p>
                 <p class="look-at-the3">
-                  look at the camera and use the sign word 'again'.
+                  {% trans "look at the camera and use the sign word 'again'." %}
                 </p>
               </div>
             </div>

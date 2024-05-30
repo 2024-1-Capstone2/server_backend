@@ -6,3 +6,11 @@ class BusInfo(models.Model):
     bus_number = models.CharField(max_length=100)
     departure_station = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+
+class BusSchedule(models.Model):
+    bus_number = models.CharField(max_length=15, unique=True)
+    t1_weekday_times = models.TextField(null=True)
+    t1_weekend_times = models.TextField(null=True)
+    t2_weekday_times = models.TextField(null=True)
+    t2_weekend_times = models.TextField(null=True)
+

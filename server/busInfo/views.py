@@ -4,6 +4,12 @@ from asgiref.sync import async_to_sync
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.utils import translation
+from .models import BusSchedule
+from .busData import getBusInfo
+import ast
+from django.conf import settings
+import json
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -35,7 +41,7 @@ def request_question(request):
     return Response(status=200)
 
 @api_view(['GET'])
-def request_reQuestion(request):
+def request_re_question(request):
     channel_layer = get_channel_layer()
     async def async_group_send():
         await channel_layer.group_send(
@@ -50,8 +56,74 @@ def request_reQuestion(request):
 
     return Response(status=200)
 
-def question(request):
-    return render(request, 'question.html')
+@api_view(['GET'])
+def request_bus_schedule(request):
+    channel_layer = get_channel_layer()
+    async def async_group_send():
+        await channel_layer.group_send(
+            'javaScript_group',
+            {
+                'type': 'javaScript_message',
+                'message': str('busInfo/busSchedule')
+            }
+    )
 
-def reQuestion(request):
-    return render(request, 'reQuestion.html')
+    async_to_sync(async_group_send)()
+
+    return Response(status=200)
+
+@api_view(['GET'])
+def request_information_desk(request):
+    channel_layer = get_channel_layer()
+    async def async_group_send():
+        await channel_layer.group_send(
+            'javaScript_group',
+            {
+                'type': 'javaScript_message',
+                'message': str('busInfo/informationDesk')
+            }
+    )
+
+    async_to_sync(async_group_send)()
+
+    return Response(status=200)
+
+@api_view(['GET'])
+def request_bus_guide(request):
+    channel_layer = get_channel_layer()
+    async def async_group_send():
+        await channel_layer.group_send(
+            'javaScript_group',
+            {
+                'type': 'javaScript_message',
+                'message': str('busInfo/busGuide')
+            }
+    )
+
+    async_to_sync(async_group_send)()
+
+    return Response(status=200)
+
+def question(request):
+    return render(request, 'question/question.html')
+
+def re_question(request):
+    return render(request, 'question/reQuestion.html')
+
+def bus_schedule(request):
+    translation.activate('zh-hans')
+    return render(request, 'bus_boarding/bus_schedule_request.html')
+
+def information_desk(request):
+    return render(request, 'information_desk.html')
+
+def bus_guide(request):
+    return render(request, 'bus_boarding/bus_guide.html')
+
+def temp(request):
+    info = getBusInfo()
+    all_schedules = BusSchedule.objects.all()
+    for schedule in all_schedules:
+        print(schedule)
+
+    return render(request, 'temp.html')

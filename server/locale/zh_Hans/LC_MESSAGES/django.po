@@ -37,3 +37,42 @@ msgstr "欢迎来到我的网站。"
 #: multiLanguage/views.py:10
 msgid "Please choose a language by looking at the camera."
 msgstr "请看摄像头并选择语言。"
+
+msgid "Please go to the infomation desk."
+msgstr "请到问讯台去."
+
+msgid "The screen will close after 15s"
+msgstr "屏幕将在15秒后关闭"
+
+msgid "Information Desk"
+msgstr "问讯台"
+
+msgid "If the sentence displayed on the screen was not what you intended,"
+msgstr "如果屏幕上显示的句子不是您想要的,"
+
+msgid "look at the camera and use the sign word 'again'."
+msgstr "请看摄像头并使用手势词'再来一次'。"
+
+msgid "Please contact a counselor"
+msgstr "请联系辅导员"
+
+msgid "Please try sign language again"
+msgstr "请再次尝试手语"
+
+msgid "Please tell us the bus number"
+msgstr "请告诉我们公交车号码"
+
+msgid "you want to know"
+msgstr "你想知道"
+
+msgid "the bus schedule for"
+msgstr "公交车时间表"
+
+msgid "Please board the {{ bus_number }} bus"
+msgstr "请搭乘{{ bus_number }}公交车"
+
+msgid "The map will close after 30s"
+msgstr "地图将在30秒后关闭"
+
+msgid "At bus stop {{ bus_stop }}"
+msgstr "在{{ bus_stop }}公交车站"

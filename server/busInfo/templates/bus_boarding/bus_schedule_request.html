@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,11 +49,11 @@
            src="{% static 'image/one/group-21@2x.png' %}" />
 
       <div class="if-the-sentence-container4">
-        <p class="if-the-sentence4">
-          If the sentence displayed on the screen was not what you intended,
+        <p class="if-the-sentence2">
+          {% trans "If the sentence displayed on the screen was not what you intended," %}
         </p>
-        <p class="look-at-the4">
-          look at the camera and use the sign word 'again'.
+        <p class="look-at-the2">
+          {% trans "look at the camera and use the sign word 'again'." %}
         </p>
       </div>
       <img
@@ -62,7 +63,7 @@
         src="{% static 'image/one/group-21@2x.png' %}"
       />
 
-      <div class="number-request-content-wrapper">
+      <div class="number-request-content-wrapper" style="justify-content: center">
         <div class="number-request-content">
           <div class="number-request">
             <div class="image-8-group">
@@ -86,10 +87,17 @@
                 src="{% static 'image/one/polygon-11.svg' %}"
               />
 
-              <button class="rectangle-parent11">
+              <div class="rectangle-parent11">
                 <div class="frame-child15"></div>
-                <div class="please-tell-us">Please contact a counselor</div>
-              </button>
+                <div class="please-tell-us" style="display: flex; justify-content: center;">{% trans "Please tell us the bus number" %}</div>
+              </div>
+            </div>
+            <div class="rectangle-parent12" style="justify-content: center">
+              <div class="frame-child16"></div>
+              <div class="you-want-to-container">
+                <p class="you-want-to">{% trans "you want to know" %}</p>
+                <p class="the-bus-schedule">{% trans "the bus schedule for" %}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -102,17 +110,13 @@
               <video id="video" autoplay></video>
               <canvas id="output"></canvas>
             </div>
-<!--            <div class="h-[31.25rem] w-[56.25rem] relative max-w-full">-->
-<!--              <video id="video" autoplay></video>-->
-<!--              <canvas id="output"></canvas>-->
-<!--            </div>-->
           </div>
           <div class="if-the-sentence-container5">
             <p class="if-the-sentence5">
-              If the sentence displayed on the screen was not what you intended,
+          {% trans "If the sentence displayed on the screen was not what you intended," %}
             </p>
             <p class="look-at-the5">
-              look at the camera and use the sign word 'again'.
+          {% trans "look at the camera and use the sign word 'again'." %}
             </p>
           </div>
         </div>

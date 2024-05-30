@@ -9,9 +9,17 @@ urlpatterns = [
     path('<str:upperLevel>/<str:lowerLevel>', views.request_question, name='request_question'),
 
     # rest
-    path('request_question', views.request_question, name='request_question'),
-    path('request_reQuestion', views.request_reQuestion, name='request_reQuestion'),
+    path('requestQuestion', views.request_question, name='request_question'),
+    path('requestReQuestion', views.request_re_question, name='request_re_question'),
+    path('requestBusSchedule', views.request_bus_schedule, name='request_bus_schedule'),
+    path('requestInformationDesk', views.request_information_desk, name='request_information_desk'),
+    path('requestBusGuide', views.request_bus_guide, name='request_bus_guide'),
     # render
     path('question', views.question, name='question'),
-    path('reQuestion', views.reQuestion, name='reQuestion'),
+    path('reQuestion', views.re_question, name='re_question'),
+    path('busSchedule', views.bus_schedule, name='bus_schedule'),
+    path('busGuide', views.bus_guide, name='bus_guide'),
+    path('informationDesk', views.information_desk, name='information_desk'),
+
+    path('temp', views.temp, name='temp'),
 ]

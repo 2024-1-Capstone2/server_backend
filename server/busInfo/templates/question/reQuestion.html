@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -86,9 +87,9 @@
                 src="{% static 'image/one/polygon-11.svg' %}"
               />
 
-              <button class="rectangle-parent11">
+              <button class="rectangle-parent11" style="justify-content: center">
                 <div class="frame-child15"></div>
-                <div class="please-tell-us">Please try sign language again</div>
+                <div class="please-tell-us">{% trans "Please try sign language again" %}</div>
               </button>
             </div>
           </div>
@@ -108,12 +109,12 @@
 <!--            </div>-->
           </div>
           <div class="if-the-sentence-container5">
-            <p class="if-the-sentence5">
-              If the sentence displayed on the screen was not what you intended,
-            </p>
-            <p class="look-at-the5">
-              look at the camera and use the sign word 'again'.
-            </p>
+            <p class="if-the-sentence2">
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
+                </p>
+                <p class="look-at-the2">
+                  {% trans "look at the camera and use the sign word 'again'." %}
+                </p>
           </div>
         </div>
         <div class="frame-wrapper4">

@@ -99,29 +99,33 @@
             </div>
           </div>
           <div
-            class="w-[30.125rem] flex flex-row items-start justify-center pt-[3.187rem] px-[0rem] pb-[0rem] box-border"
+            class="w-[30.125rem] flex flex-row items-start justify-center pt-[1rem] px-[0rem] pb-[0rem] box-border"
           >
             <div
               class="self-stretch flex flex-col items-start justify-start gap-[3.125rem] mq450:gap-[1.563rem]"
             >
               <div
-                class="self-stretch h-[1.5rem] relative tracking-[0.1em] inline-block mq450:text-[1rem]"
+                class="self-stretch h-[1.5rem] relative tracking-[0.1em] inline-block text-center text-base tmq450:text-[1rem]"
               >
-                카메라 보고 언어를 말해라.
+                Please choose a language by looking at the camera.
+              </div>
+              <div
+                class="self-stretch h-[1.5rem] relative tracking-[0.1em] inline-block text-center text-lg mq450:text-[1rem]"
+              >
+                请看摄像头并选择语言。
               </div>
             </div>
           </div>
         </div>
         <div
-          class="flex-1 flex flex-col items-start justify-start gap-[1.187rem] min-w-[36.563rem] max-w-full ml-[-0.063rem] text-right text-[2.813rem] text-white mq800:min-w-full mq1150:ml-0"
+          class="flex-1 flex flex-col items-start justify-start gap-[1.187rem] min-w-[36.563rem] max-w-full ml-[-0.063rem] text-right text-[2.813rem] mq800:min-w-full mq1150:ml-0"
         >
             <div class="h-[31.25rem] w-[56.25rem] relative max-w-full">
               <video id="video" autoplay></video>
               <canvas id="output"></canvas>
             </div>
           <div
-            class="w-[56.25rem] flex items-center justify-center py-[0rem] px-[1.25rem] box-border max-w-full text-[1.25rem] text-darkgray"
-          >
+            class="w-[56.25rem] flex items-center justify-center py-[0rem] px-[1.25rem] box-border max-w-full text-[1.25rem] text-darkgray">
             <div class="w-[18.375rem] text-center relative tracking-[0.1em] font-medium inline-block shrink-0 mq450:text-[1rem]">
               LANGUAGE 语言
             </div>
@@ -134,7 +138,8 @@
               class="h-[12.563rem] flex-1 relative min-w-[18.875rem] max-w-full"
             >
               <textarea
-                class="[border:none] bg-whitesmoke-200 h-[calc(100%_-_1px)] w-[25rem] [outline:none] absolute top-[0rem] bottom-[0.063rem] left-[0rem] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl"
+                class=" bg-whitesmoke-200 h-[calc(100%_-_1px)] w-[25rem] [outline:none] border border-gray-300
+                absolute top-[0rem] bottom-[0.063rem] left-[0rem] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl"
                 rows="{10}"
                 cols="{20}"
               >
@@ -176,7 +181,8 @@
               class="h-[15.313rem] w-[25rem] relative min-w-[25rem] max-w-full mq800:min-w-full mq1150:flex-1"
             >
               <textarea
-                class="[border:none] bg-whitesmoke-100 h-[12.5rem] w-[25rem] [outline:none] absolute top-[0rem] left-[0rem] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl"
+                class="bg-whitesmoke-100 h-[12.5rem] w-[25rem] [outline:none] border border-gray-300
+                absolute top-[0rem] left-[0rem] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl"
                 rows="{10}"
                 cols="{20}"
               >
@@ -224,78 +230,5 @@
       </section>
     </div>
     <script src="{% static 'js/ml.js' %}"></script>
-<!--  <script>-->
-<!--    const videoElement = document.getElementById('video');-->
-<!--    const canvasElement = document.getElementById('output');-->
-<!--    const canvasCtx = canvasElement.getContext('2d');-->
-<!--    function sendDataToServer(data) {-->
-<!--      socket.send(JSON.stringify(data));-->
-<!--    }-->
-
-<!--    const hands = new Hands({locateFile: (file) => {-->
-<!--      return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;-->
-<!--    }});-->
-<!--    hands.setOptions({-->
-<!--      maxNumHands: 2,-->
-<!--      modelComplexity: 1,-->
-<!--      minDetectionConfidence: 0.5,-->
-<!--      minTrackingConfidence: 0.5-->
-<!--    });-->
-<!--    hands.onResults(onResults);-->
-
-<!--    const camera = new Camera(videoElement, {-->
-<!--      onFrame: async () => {-->
-<!--        await hands.send({image: videoElement});-->
-<!--      },-->
-<!--      width: 800,-->
-<!--      height: 480-->
-<!--    });-->
-<!--    camera.start();-->
-
-<!--    // WebSocket 연결 열기-->
-<!--    const socket = new WebSocket('ws://localhost:8000/ws/js/');-->
-
-<!--    // 메시지 이벤트 핸들러 추가-->
-<!--    // dicsonnect가 아니라 나중에는 해당하는 모듈로 이동시키기.-->
-<!--    socket.onmessage = function(event) {-->
-<!--        const data = JSON.parse(event.data);-->
-<!--        const message = data.message;-->
-<!--        if (message === 'disconnect') {-->
-<!--          // 웹소켓 연결 끊기-->
-<!--          socket.close();-->
-<!--          // 5초 후에 request_ticket 페이지로 이동-->
-<!--          setTimeout(function() {-->
-<!--              window.location.href = 'http://localhost:8000/refund/request_ticket';-->
-<!--          }, 1000);-->
-<!--          const messageElement = document.getElementById('message');-->
-<!--          messageElement.textContent = message;-->
-<!--        }-->
-<!--        console.log('http://localhost:8000/' + message);-->
-<!--        window.location.href = 'http://localhost:8000/' + message;-->
-<!--    };-->
-
-<!--    function onResults(results) {-->
-<!--      canvasCtx.save();-->
-<!--      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);-->
-<!--      canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);-->
-<!--      if (results.multiHandLandmarks) {-->
-<!--        for (const landmarks of results.multiHandLandmarks) {-->
-<!--          drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});-->
-<!--          drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});-->
-
-<!--          // Send hand landmarks data to Django server via WebSocket-->
-<!--          for (const [handId, landmarks] of results.multiHandLandmarks.entries()) {-->
-<!--            const handData = {-->
-<!--                "handId" : handId,-->
-<!--                "landmarks" : landmarks-->
-<!--            };-->
-<!--            const jsonString = JSON.stringify(handData);-->
-<!--            sendDataToServer(jsonString);-->
-<!--          }-->
-<!--        }-->
-<!--      }-->
-<!--      canvasCtx.restore();-->
-<!--    }-->
-<!--  </script>-->
   </body>
 </html>

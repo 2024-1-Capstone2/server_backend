@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +14,7 @@
   </head>
   <body>
     <div class="slide-2">
-      <div class="slide-container1">
+      <div class="slide-container1 ">
         <div class="deaf-info-top">
           <div class="deaf-info-container">
             <img
@@ -32,16 +33,16 @@
                 src="{% static 'image/one/hand-shape.svg' %}"
               />
 
-              <div class="info-desk-prompt">
+              <div class="info-desk-prompt" style="justify-content: center">
                 <div class="info-desk-prompt-child"></div>
                 <div class="please-go-to">
-                  Please go to the infomation desk.
+                 {% trans "Please go to the infomation desk." %}
                 </div>
               </div>
             </div>
-            <button class="rectangle-parent5">
+            <button class="rectangle-parent5" style="justify-content: center">
               <div class="frame-child8"></div>
-              <div class="the-screen-will">The screen will close after 15s</div>
+              <div class="the-screen-will">{% trans "The screen will close after 15s" %}</div>
             </button>
           </div>
         </div>
@@ -54,7 +55,7 @@
             <div class="b1">B1</div>
           </div>
           <div class="info-desk-label">
-            <h2 class="information-desk">Information Desk</h2>
+            <h2 class="information-desk">{% trans "Information Desk" %}</h2>
           </div>
         </div>
         <img
@@ -76,11 +77,10 @@
             <div class="if-the-sentence-displayed-on-t-wrapper">
               <div class="if-the-sentence-container2">
                 <p class="if-the-sentence2">
-                  If the sentence displayed on the screen was not what you
-                  intended,
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
                 </p>
                 <p class="look-at-the2">
-                  look at the camera and use the sign word 'again'.
+                  {% trans "look at the camera and use the sign word 'again'." %}
                 </p>
               </div>
             </div>
