@@ -1,0 +1,104 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'css/one/slide-2.css' %}" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="{% static 'js/config.js' %}"></script>
+  </head>
+  <body>
+    <div class="slide-2">
+      <div class="slide-container1 ">
+        <div class="deaf-info-top">
+          <div class="deaf-info-container">
+            <img
+              class="image-8-icon1"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/image-9@2x.png' %}"
+            />
+          </div>
+          <div class="frame-parent5 add-message">
+            <div class="rectangle-parent5" style="justify-content: center">
+              <div class="frame-child8"></div>
+              <div class="the-screen-will">{% trans "The screen will close after 15s" %}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="sentence-check-top">
+        <div class="sentence-check-top-child"></div>
+        <div class="sentence-check-container">
+          <div class="sentence-check-content">
+            <div class="sentence-check-content-child"></div>
+            <div class="b1">B1</div>
+          </div>
+          <div class="info-desk-label">
+            <h2 class="information-desk">{% trans "Information Desk" %}</h2>
+          </div>
+        </div>
+        <img
+          class="sentence-check-top-item"
+          loading="lazy"
+          alt=""
+          src="{% static 'image/one/rectangle-10@2x.png' %}"
+        />
+
+        <footer class="feedback-prompt">
+          <div class="feedback-container">
+            <img
+              class="feedback-container-child"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/group-21@2x.png' %}"
+            />
+
+            <div class="if-the-sentence-displayed-on-t-wrapper">
+              <div class="if-the-sentence-container2">
+                <p class="if-the-sentence2">
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
+                </p>
+                <p class="look-at-the2">
+                  {% trans "look at the camera and use the sign word 'again'." %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </div>
+    <script>
+      function addMessageInfoDesk(message) {
+        const add_messageElement = document.querySelector('.add-message');
+
+        var newRectangleParentElement = document.createElement('div');
+        newRectangleParentElement.className = 'rectangle-parent5';
+        newRectangleParentElement.style.justifyContent = 'center';
+
+        var newFrameChildElement = document.createElement('div');
+        newFrameChildElement.className = 'frame-child8';
+
+        var newTheScreenWillElement = document.createElement('div');
+        newTheScreenWillElement.className = 'the-screen-will';
+        newTheScreenWillElement.style.textAlign = 'center';
+        newTheScreenWillElement.textContent = message;
+
+        newRectangleParentElement.appendChild(newFrameChildElement);
+        newRectangleParentElement.appendChild(newTheScreenWillElement);
+
+        add_messageElement.appendChild(newRectangleParentElement);
+      }
+    </script>
+    <script src="{% static 'js/socket.js' %}"></script>
+  </body>
+</html>

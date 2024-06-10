@@ -12,6 +12,10 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/config.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <div
@@ -258,5 +262,7 @@
         Daejeon
       </div>
     </div>
+  <script src="{% static 'js/ml.js' %}"></script>
+    <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

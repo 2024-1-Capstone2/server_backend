@@ -115,21 +115,475 @@
             </h3>
           </div>
         </header>
-        <div
-          class="self-stretch flex flex-col items-end justify-start gap-[3.375rem] max-w-full mq750:gap-[1.688rem]"
-        >
           <div
-            class="self-stretch bg-silver flex flex-row items-start justify-center pt-[16.125rem] pb-[15.625rem] pr-[1.25rem] pl-[3.687rem] box-border max-w-full z-[1] mq750:pt-[10.5rem] mq750:pb-[10.125rem] mq750:box-border"
+            class="self-stretch flex flex-row items-start justify-end max-w-full text-center text-[0.75rem] text-black"
           >
             <div
-              class="h-[34.25rem] w-[62.188rem] relative bg-silver hidden max-w-full"
-            ></div>
-            <h3
-              class="m-0 w-[7.625rem] relative text-inherit tracking-[0.1em] font-medium font-inherit inline-block shrink-0 z-[2] mq750:text-[1.5rem] mq450:text-[1.125rem]"
+              class="w-[58.063rem] flex flex-row items-end justify-start gap-[1.312rem] max-w-full mq1100:flex-wrap"
             >
-              시간표
-            </h3>
+              <div
+                class="flex-1 rounded bg-white box-border overflow-x-auto flex flex-row items-start justify-start max-w-full z-[3] border-[1px] border-solid border-silver-200 mq1100:min-w-full"
+              >
+                <div
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for num in number1 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
+                    >
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for num in number2 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
+                    >
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for num in number3 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
+                    >
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        08:00
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="h-[20.813rem] flex flex-col items-start justify-start"
+              >
+                <div
+                  class="w-[0.5rem] h-[14.188rem] relative rounded-xl bg-gainsboro-300 z-[1]"
+                ></div>
+              </div>
+            </div>
           </div>
+<!--        </div>-->
+<!--          </div>-->
           <footer
             class="w-[41.438rem] flex flex-row items-start justify-end py-[0rem] px-[0.562rem] box-border max-w-full text-right text-[0.938rem] text-black font-inter"
           >
@@ -161,5 +615,6 @@
         </div>
       </section>
     </div>
+      <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

@@ -26,28 +26,6 @@
     });
     camera.start();
 
-    // WebSocket 연결 열기
-    const socket = new WebSocket('ws://localhost:8000/ws/js/');
-
-    // 메시지 이벤트 핸들러 추가
-    // dicsonnect가 아니라 나중에는 해당하는 모듈로 이동시키기.
-    socket.onmessage = function(event) {
-        const data = JSON.parse(event.data);
-        const message = data.message;
-        if (message === 'disconnect') {
-          // 웹소켓 연결 끊기
-          socket.close();
-          // 5초 후에 request_ticket 페이지로 이동
-          setTimeout(function() {
-              window.location.href = 'http://localhost:8000/refund/request_ticket';
-          }, 1000);
-          const messageElement = document.getElementById('message');
-          messageElement.textContent = message;
-        }
-        console.log('http://localhost:8000/' + message);
-        window.location.href = 'http://localhost:8000/' + message;
-    };
-
     function onResults(results) {
       canvasCtx.save();
       canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);

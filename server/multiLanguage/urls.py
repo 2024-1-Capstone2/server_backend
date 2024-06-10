@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    # path('<str:upperLevel>/<str:lowerLevel>', views.change_language_mode, name='change_language_mode'),
+    # rest
+    path('requestChoiceLanguage', views.request_choice_language, name='request_choice_language'),
+    # render
+    path('choiceLanguage', views.choice_language, name='choice_language'),
 ]

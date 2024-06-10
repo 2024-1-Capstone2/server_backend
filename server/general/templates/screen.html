@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'css/one/global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/config.js' %}"></script>
+    <title>Hand Bridge</title>
+  </head>
+  <body>
+    <div
+      class="w-full h-[56.25rem] relative bg-gray overflow-hidden flex flex-col items-center justify-start pt-[5.687rem] pb-[10.656rem] pr-[1.25rem] pl-[1.437rem] box-border gap-[4.875rem] leading-[normal] tracking-[normal] mq481:gap-[1.188rem] mq962:gap-[2.438rem]"
+    >
+      <div
+        class="w-[67.313rem] h-[53.125rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full"
+      ></div>
+      <header
+        class="w-[57.438rem] h-[14.938rem] flex flex-col items-end justify-start max-w-full text-right text-[2.813rem] text-white font-inter"
+      >
+        <img
+          class="self-stretch flex-1 relative max-w-full overflow-hidden max-h-full object-cover"
+          loading="lazy"
+          alt=""
+          src="{% static 'image/one/-20240504--10331@2x.png' %}"
+        />
+
+        <div
+          class="w-[26.063rem] flex flex-row items-start justify-center py-[0rem] px-[1.25rem] box-border max-w-full"
+        >
+          <div class="relative tracking-[0.1em] inline-block min-w-[7.313rem]">
+            CAM
+          </div>
+        </div>
+      </header>
+      <div
+        class="w-[57.438rem] flex flex-row items-start justify-center py-[0rem] pr-[0.25rem] pl-[0rem] box-border max-w-full"
+      >
+        <div
+          class="w-[21.188rem] flex flex-row items-start justify-start max-w-full"
+        >
+          <div class="h-[20.094rem] flex-1 relative max-w-full">
+            <img
+              class="absolute top-[3.381rem] left-[3.756rem] w-[13.963rem] h-[13.244rem] object-contain"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/image-91@2x.png' %}"
+            />
+
+            <div
+              class="absolute top-[0rem] left-[0rem] rounded-[50%] box-border w-full h-full z-[1] border-[0px] border-solid border-lightseagreen"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <script src="{% static 'js/socket.js' %}"></script>
+  </body>
+</html>

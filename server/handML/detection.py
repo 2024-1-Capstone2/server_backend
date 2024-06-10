@@ -1,9 +1,7 @@
 from tensorflow.keras.models import load_model
 import numpy as np
 from django.conf import settings
-import mediapipe as mp
-import time
-import tensorflow as tf
+
 
 actions = [
     # 기본 단어
@@ -87,4 +85,5 @@ def detect_action(hand_data):
 
     # 예측값의 신뢰도(confidence)가 0.9 이상이라면 동작들을 저장
     action = actions[i_pred]
+
     return action

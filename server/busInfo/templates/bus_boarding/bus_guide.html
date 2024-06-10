@@ -23,27 +23,20 @@
               src="{% static 'image/one/image-9@2x.png' %}"
             />
           </div>
-          <div class="boarding-instructions">
+          <div class="boarding-instructions add-message">
             <div class="map-instructions">
-              <img
-                class="icon1"
-                loading="lazy"
-                alt=""
-                src="{% static 'image/one/polygon-1.svg' %}"
-              />
-
-              <button class="rectangle-parent6">
+              <div class="rectangle-parent6">
                 <div class="frame-child9"></div>
-                <div class="please-board-the">{% blocktrans %}Please board the {{ bus_number }} bus{% endblocktrans %}</div>
-              </button>
+                <div class="please-board-the">{% trans "Please board the 6010 bus" %}</div>
+              </div>
             </div>
             <button class="rectangle-parent7">
               <div class="frame-child10"></div>
-              <div class="at-bus-stop">{% blocktrans %}At bus stop {{ bus_stop }}{% endblocktrans %}</div>
+              <div class="at-bus-stop">{% trans "At bus stop 7A" %}</div>
             </button>
             <button class="rectangle-parent8">
               <div class="frame-child11"></div>
-              <div class="the-map-will">{% blocktrans %}The map will close after 30s{% endblocktrans %}</div>
+              <div class="the-map-will">{% trans "The map will close after 30s" %}</div>
             </button>
           </div>
         </div>
@@ -59,7 +52,7 @@
               src="{% static 'image/one/image-26@2x.png' %}"
             />
 
-            <h3 class="bus-stop-map">Bus stop map</h3>
+            <h3 class="bus-stop-map">{% trans "Bus stop map" %}</h3>
           </div>
           <div class="image-27-wrapper">
             <img
@@ -93,5 +86,40 @@
         </footer>
       </section>
     </div>
+    <script>
+        function addMessageToBusGuide(message){
+        const add_messageElement = document.querySelector('.add-message');
+
+        // 새로운 'schedule-prompt' div 요소를 생성합니다.
+        var newMapInstructions = document.createElement('div');
+        newMapInstructions.className = 'map-instructions';
+
+        // 새로운 div 요소를 생성
+        var newParentElement = document.createElement('div');
+        newParentElement.className = 'rectangle-parent6';
+        newParentElement.style.alignItems = 'center';
+        newParentElement.style.justifyContent = 'center';
+        // 자식 div요소를 추가
+        var newChildElement1 = document.createElement('div');
+        newChildElement1.className = 'frame-child9';
+
+        var newChildElement2 = document.createElement('div');
+        newChildElement2.className = 'please-board-the';
+        newChildElement2.style.textAlign = 'center';
+        newChildElement2.textContent = message;  // 메시지로 대체합니다.
+
+        // 자식 div 요소들을 부모 div 요소에 추가합니다.
+        newParentElement.appendChild(newChildElement1);
+        newParentElement.appendChild(newChildElement2);
+
+        // 부모 div 요소를 'schedule-prompt' div 요소에 추가합니다.
+        newMapInstructions.appendChild(newParentElement);
+
+        // 생성한 부모 div 요소를 원하는 위치에 추가합니다.
+        add_messageElement.appendChild(newMapInstructions);
+      }
+    </script>
+    <script src="{% static 'js/ml.js' %}"></script>
+    <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

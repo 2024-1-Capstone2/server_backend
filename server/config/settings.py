@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'websocket_handler.apps.WebsocketHandlerConfig',
     'multiLanguage.apps.LanguageConfig',
     'ticket.apps.TicketConfig',
+    'general.apps.GeneralConfig',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+TEMP = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

@@ -38,20 +38,63 @@ msgstr "欢迎来到我的网站。"
 msgid "Please choose a language by looking at the camera."
 msgstr "请看摄像头并选择语言。"
 
-msgid "Please go to the infomation desk."
-msgstr "请到问讯台去."
-
-msgid "The screen will close after 15s"
-msgstr "屏幕将在15秒后关闭"
-
 msgid "Information Desk"
 msgstr "问讯台"
+
+msgid "Selectable region"
+msgstr "可选择区域"
+
+msgid "number"
+msgstr "号码"
+
+msgid "region name"
+msgstr "区域名称"
 
 msgid "If the sentence displayed on the screen was not what you intended,"
 msgstr "如果屏幕上显示的句子不是您想要的,"
 
 msgid "look at the camera and use the sign word 'again'."
 msgstr "请看摄像头并使用手势词'再来一次'。"
+
+msgid "bus stop"
+msgstr "公交车站"
+
+msgid "Selectable bus stop"
+msgstr "可选择公交车站"
+
+msgid "Bus information"
+msgstr "公交车信息"
+
+msgid "To the last stop"
+msgstr "到最后一站"
+
+msgid "fare"
+msgstr "车费"
+
+msgid "Transport company"
+msgstr "交通公司"
+
+msgid "(contact information)"
+msgstr "(联系方式)"
+
+msgid "Bus stop map"
+msgstr "公交车站地图"
+
+msgid "Bus Schedule"
+msgstr "公交车时间表"
+
+msgid "first bus"
+msgstr "第一班车"
+
+msgid "last bus"
+msgstr "最后一班车"
+
+# temp -----------
+msgid "Please go to the infomation desk."
+msgstr "请到问讯台去."
+
+msgid "The screen will close after 15s"
+msgstr "屏幕将在15秒后关闭"
 
 msgid "Please contact a counselor"
 msgstr "请联系辅导员"
