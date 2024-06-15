@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import os
+import os, json
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,13 +34,26 @@ MODEL_PATH_CSL_HEADCNT = os.path.join(BASE_DIR, 'handML/model', 'model_csl_headc
 MODEL_PATH_CSL_NUM = os.path.join(BASE_DIR, 'handML/model', 'model_csl_num.keras')
 MODEL_PATH_CSL_YESORNO = os.path.join(BASE_DIR, 'handML/model', 'model_csl_yesorno.keras')
 
+# 번역 키
+secret_file = os.path.join(BASE_DIR, 'secrets.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = get_secret("SECRET_KEY")
+
 ASGI_APPLICATION = "config.asgi.application"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-poo4g_-)(nw3vk_i19s=n+bqzcia_ycm@daqfe4%#2#igj#jx#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

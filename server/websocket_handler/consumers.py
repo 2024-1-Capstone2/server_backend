@@ -21,6 +21,8 @@ flutterCommunicator: Flutter 앱과 통신하는 웹소켓 커넥터
 javaScriptCommunicator: JavaScript 앱과 통신하는 웹소켓 커넥터
 '''
 
+auth_key = settings.SECRET_KEY
+
 class FlutterCommunicator(AsyncWebsocketConsumer):
 
     def __init__(self, *args, **kwargs):
@@ -71,7 +73,6 @@ class FlutterCommunicator(AsyncWebsocketConsumer):
         # # deepl api를 이용하여 번역
         if(type == 'translate'):
             message = data.get('message')
-            auth_key = "42878139-d11b-4c9d-a100-2abfb30d4a7c:fx"
             translator = deepl.Translator(auth_key)
             result = translator.translate_text(message, target_lang=lang_code)
         channel_layer = get_channel_layer()
