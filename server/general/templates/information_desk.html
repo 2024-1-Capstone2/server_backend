@@ -28,10 +28,19 @@
               src="{% static 'image/one/image-9@2x.png' %}"
             />
           </div>
-          <div class="frame-parent5 add-message">
+          <div class="frame-parent5">
             <div class="rectangle-parent5" style="justify-content: center">
               <div class="frame-child8"></div>
               <div class="the-screen-will">{% trans "The screen will close after 15s" %}</div>
+            </div>
+          </div>
+          <div class="frame-parent5">
+            <div class="rectangle-parent5" style="justify-content: center">
+              <div class="frame-child8"></div>
+              <div class="the-screen-will">
+                <div class="text-xs text-center items-center new-message">&nbsp;
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -53,16 +62,16 @@
           alt=""
           src="{% static 'image/one/rectangle-10@2x.png' %}"
         />
-
+        {% get_current_language as LANGUAGE_CODE %}
         <footer class="feedback-prompt">
-          <div class="feedback-container">
+
+          <div class="{% if LANGUAGE_CODE == 'en' %}feedback-container{% elif LANGUAGE_CODE == 'zh-hans' %}feedback-container2{% endif %}">
             <img
               class="feedback-container-child"
               loading="lazy"
               alt=""
               src="{% static 'image/one/group-21@2x.png' %}"
             />
-
             <div class="if-the-sentence-displayed-on-t-wrapper">
               <div class="if-the-sentence-container2">
                 <p class="if-the-sentence2">
@@ -77,28 +86,6 @@
         </footer>
       </section>
     </div>
-    <script>
-      function addMessageInfoDesk(message) {
-        const add_messageElement = document.querySelector('.add-message');
-
-        var newRectangleParentElement = document.createElement('div');
-        newRectangleParentElement.className = 'rectangle-parent5';
-        newRectangleParentElement.style.justifyContent = 'center';
-
-        var newFrameChildElement = document.createElement('div');
-        newFrameChildElement.className = 'frame-child8';
-
-        var newTheScreenWillElement = document.createElement('div');
-        newTheScreenWillElement.className = 'the-screen-will';
-        newTheScreenWillElement.style.textAlign = 'center';
-        newTheScreenWillElement.textContent = message;
-
-        newRectangleParentElement.appendChild(newFrameChildElement);
-        newRectangleParentElement.appendChild(newTheScreenWillElement);
-
-        add_messageElement.appendChild(newRectangleParentElement);
-      }
-    </script>
     <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

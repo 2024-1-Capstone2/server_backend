@@ -15,6 +15,7 @@ def request_ticket(request):
             'javaScript_group',
             {
                 'type': 'javaScript_message',
+                'message_type': 'url_move',
                 'message': str('refund/')
             }
     )
@@ -33,6 +34,7 @@ def request_question(request):
             'javaScript_group',
             {
                 'type': 'javaScript_message',
+                'message_type': 'url_move',
                 'message': str('refund/question')
             }
         )
@@ -43,14 +45,10 @@ def request_question(request):
 
 def ticket(request):
     translation.activate(settings.LANGUAGE_CODE)
-    return render(request, 'refund_request_ticket.html')
+    language_code = settings.LANGUAGE_CODE
+    return render(request, 'refund_request_ticket.html', {'language_code': language_code})
 
 def question(request):
     translation.activate(settings.LANGUAGE_CODE)
     return render(request, 'refund_question.html')
-
-# def impossible(request):
-#     translation.activate(settings.LANGUAGE_CODE)
-#     return render(request, 'refund_impossible.html')
-
 

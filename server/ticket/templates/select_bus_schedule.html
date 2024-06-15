@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,25 +11,43 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
+    <title>시간표 선택</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/config.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+    #video{
+      display: none;
+    }
+    .rectangle-parent14 {
+        position: relative;
+    }
+
+    .staff{
+      text-align: center;
+    }
+
+    #output {
+    position: absolute;
+      top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  </style>
   </head>
   <body>
     <div
       class="w-full relative bg-whitesmoke-300 overflow-hidden flex flex-row items-start justify-start py-[1.562rem] pr-[1.312rem] pl-[2.125rem] box-border gap-[2.187rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-black font-inter mq450:gap-[1.063rem] mq1275:flex-wrap"
     >
-      <img
-        class="h-[3.125rem] w-[1.25rem] absolute !m-[0] top-[12.563rem] left-[14rem] z-[1]"
-        loading="lazy"
-        alt=""
-        src="{% static 'image/one/hand-shape.svg' %}"
-      />
-
       <div
-        class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.437rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
+        class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.375rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
       >
         <div
-          class="self-stretch flex flex-col items-start justify-start gap-[2.812rem] max-w-full mq450:gap-[1.375rem]"
+          class="self-stretch flex flex-col items-start justify-start gap-[2.562rem] max-w-full mq450:gap-[1.375rem]"
         >
           <div
             class="w-[24.938rem] flex flex-row items-start justify-center pt-[0rem] px-[1.25rem] pb-[0.812rem] box-border max-w-full"
@@ -41,34 +60,53 @@
             />
           </div>
           <div
-            class="w-[25rem] flex flex-col items-start justify-start gap-[1.875rem] max-w-full"
+            class="self-stretch flex flex-col items-center justify-center py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full add-message"
           >
-            <input
-              class="[border:none] [outline:none] bg-white self-stretch h-[5rem] relative rounded-mini min-w-[15rem]"
-              type="text"
-            />
-
             <div
-              class="rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] pr-[1.25rem] pl-[1.812rem] box-border max-w-full"
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
             >
               <div
                 class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
               ></div>
               <div
-                class="w-[21.938rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
               >
-                <p class="m-0">Please tell us the time number</p>
-                <p class="m-0">you want.</p>
+                <p class="m-0">{% trans "Check the bus schedule." %}</p>
+              </div>
+            </div>
+            <div
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="text-xs text-center items-center new-message">
+                  &nbsp;
+                </div>
               </div>
             </div>
           </div>
-          <textarea
-            class="[border:none] bg-black h-[14.25rem] w-auto [outline:none] self-stretch flex flex-row items-start justify-start py-[6.375rem] px-[11.187rem] box-border font-inter text-[1.25rem] text-white"
-            placeholder="CAM"
-            rows="{11}"
-            cols="{21}"
-          >
-          </textarea>
+          <div class="h-[14.25rem] w-[25.25rem] relative max-w-full">
+            <video id="video" autoplay></video>
+            <canvas id="output"></canvas>
+          </div>
+          <div
+              class="self-stretch text-white rounded-mini bg-darkslateblue-200 flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="detect_action text-base">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       <section
@@ -81,19 +119,19 @@
           class="flex flex-row items-start justify-center gap-[2.062rem] max-w-full mq750:flex-wrap mq450:gap-[1rem]"
         >
           <img
-            class="h-[5rem] w-[5rem] relative object-cover z-[1]"
+            class="h-[3rem] w-[3rem] relative object-cover z-[1]"
             loading="lazy"
             alt=""
             src="{% static 'image/one/group-5@2x.png' %}"
           />
 
           <div
-            class="flex flex-col items-start justify-start pt-[1.187rem] px-[0rem] pb-[0rem]"
+            class="flex flex-col items-center justify-center pt-[0.187rem] px-[0rem] pb-[0rem]"
           >
             <h1
               class="m-0 relative text-inherit tracking-[0.1em] font-medium font-inherit z-[1] mq750:text-[1.75rem] mq450:text-[1.313rem]"
             >
-              Bus schedule
+              {% trans "Bus schedule" %}
             </h1>
           </div>
         </div>
@@ -106,7 +144,7 @@
             <div
               class="relative tracking-[0.1em] font-semibold inline-block min-w-[5.5rem] z-[1] mq750:text-[1.5rem] mq450:text-[1.125rem]"
             >
-              6001
+              {{bus_number}}
             </div>
             <div
               class="flex-1 flex flex-col items-start justify-start pt-[0.375rem] px-[0rem] pb-[0rem] text-[0.938rem]"
@@ -126,79 +164,140 @@
                   <div
                     class="self-stretch relative tracking-[0.1em] font-semibold z-[1]"
                   >
-                    2024-05-06
+                    {{ date }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div
-            class="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.875rem] box-border max-w-full text-right text-[0.938rem] text-white"
+            class="self-stretch flex flex-row items-start justify-center max-w-full text-center text-[0.75rem] text-black"
           >
             <div
-              class="flex-1 flex flex-row items-end justify-start gap-[1.25rem] max-w-full mq1100:flex-wrap"
+              class="w-[58.063rem] flex flex-row items-end justify-start gap-[1.312rem] max-w-full mq1100:flex-wrap"
             >
               <div
-                class="h-[26.875rem] w-[2.563rem] flex flex-col items-start justify-start py-[0rem] pr-[0.687rem] pl-[0rem] box-border"
+                class="flex-1 rounded bg-white box-border overflow-x-auto flex flex-row items-start justify-start max-w-full z-[3] border-[1px] border-solid border-silver-200 mq1100:min-w-full"
               >
                 <div
-                  class="self-stretch flex flex-col items-start justify-start gap-[2.812rem]"
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
                 >
-                  <div class="self-stretch h-[1.875rem] relative">
+                  {% for num in number1 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
                     <div
-                      class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-darkslateblue-100 w-full h-full z-[1]"
-                    ></div>
-                    <div
-                      class="absolute top-[0.438rem] left-[0.188rem] tracking-[0.1em] leading-[0.988rem] font-medium inline-block w-[0.963rem] h-[0.988rem] z-[2]"
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
                     >
-                      1
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
                     </div>
                   </div>
-                  <div class="self-stretch h-[1.875rem] relative">
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for time in chunks.0 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
                     <div
-                      class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-darkslateblue-100 w-full h-full z-[1]"
-                    ></div>
-                    <div
-                      class="absolute top-[0.438rem] left-[0.25rem] tracking-[0.1em] leading-[0.988rem] font-medium inline-block w-[0.963rem] h-[0.988rem] z-[2]"
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
                     >
-                      2
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        {% if time != " " %}
+                          {{ time }}
+                        {% else %}
+                          &nbsp;
+                        {% endif %}
+                      </div>
                     </div>
                   </div>
-                  <div class="self-stretch h-[1.875rem] relative">
+                  {% endfor %}
+                </div>
+
+                <div
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for num in number2 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
                     <div
-                      class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-darkslateblue-100 w-full h-full z-[1]"
-                    ></div>
-                    <div
-                      class="absolute top-[0.438rem] left-[0.188rem] tracking-[0.1em] leading-[0.988rem] font-medium inline-block w-[0.963rem] h-[0.988rem] z-[2]"
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
                     >
-                      1
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
                     </div>
                   </div>
-                  <div class="self-stretch h-[1.875rem] relative">
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for time in chunks.1 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
                     <div
-                      class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-darkslateblue-100 w-full h-full z-[1]"
-                    ></div>
-                    <div
-                      class="absolute top-[0.438rem] left-[0.25rem] tracking-[0.1em] leading-[0.988rem] font-medium inline-block w-[0.963rem] h-[0.988rem] z-[2]"
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
                     >
-                      2
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        {% if time != " " %}
+                          {{ time }}
+                        {% else %}
+                          &nbsp;
+                        {% endif %}
+                      </div>
                     </div>
                   </div>
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[5.313rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for num in number3 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[1.062rem] px-[0.687rem] pb-[1.131rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-start justify-start py-[0rem] px-[0.75rem]"
+                    >
+                      <div class="flex-1 relative leading-[1rem]">{{num}}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div
+                  class="w-[13.438rem] bg-gray-200 overflow-hidden shrink-0 flex flex-col items-center justify-center"
+                >
+                  {% for time in chunks.2 %}
+                  <div
+                    class="self-stretch bg-gray-200 flex flex-col items-center justify-center pt-[0.437rem] px-[0rem] pb-[0.506rem] border-t-[1px] border-solid border-silver-200 border-l-[1px]"
+                  >
+                    <div
+                      class="self-stretch overflow-hidden flex flex-row items-center justify-center py-[0.625rem] px-[0.75rem]"
+                    >
+                      <div
+                        class="flex-1 relative leading-[1rem] whitespace-nowrap"
+                      >
+                        {% if time != " " %}
+                          {{ time }}
+                        {% else %}
+                          &nbsp;
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
                 </div>
               </div>
               <div
-                class="flex-1 bg-whitesmoke-300 flex flex-row items-start justify-start pt-[15.062rem] px-[8.062rem] pb-[14.875rem] box-border min-w-[36.625rem] max-w-full z-[1] text-[2rem] text-black mq750:pt-[9.813rem] mq750:px-[4rem] mq750:pb-[9.688rem] mq750:box-border mq1100:min-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+                class="h-[20.813rem] flex flex-col items-start justify-start"
               >
-                <div
-                  class="h-[32.625rem] w-[56.313rem] relative bg-whitesmoke-300 hidden max-w-full"
-                ></div>
-                <h1
-                  class="m-0 w-[23.5rem] relative text-inherit tracking-[0.1em] font-normal font-inherit inline-block shrink-0 max-w-full z-[2] mq750:text-[1.625rem] mq450:text-[1.188rem]"
-                >
-                  시간표
-                </h1>
-              </div>
-              <div class="h-[20.75rem] flex flex-col items-start justify-start">
                 <div
                   class="w-[0.5rem] h-[14.188rem] relative rounded-xl bg-gainsboro-300 z-[1]"
                 ></div>
@@ -224,11 +323,10 @@
             >
               <div class="self-stretch relative tracking-[0.1em] z-[1]">
                 <p class="m-0">
-                  If the sentence displayed on the screen was not what you
-                  intended,
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
                 </p>
                 <p class="m-0">
-                  look at the camera and use the sign word 'again'.
+                  {% trans "look at the camera and use the sign word 'again'." %}
                 </p>
               </div>
             </div>
@@ -236,5 +334,7 @@
         </footer>
       </section>
     </div>
+    <script src="{% static 'js/ml.js' %}"></script>
+    <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

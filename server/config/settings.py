@@ -24,7 +24,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MODEL_PATH = os.path.join(BASE_DIR, 'handML/model', 'model_asl.keras')
+MODEL_PATH_ASL = os.path.join(BASE_DIR, 'handML/model', 'model_asl.keras')
+MODEL_PATH_ASL_HEADCNT = os.path.join(BASE_DIR, 'handML/model', 'model_asl_headcnt.keras')
+MODEL_PATH_ASL_NUM = os.path.join(BASE_DIR, 'handML/model', 'model_asl_num.keras')
+MODEL_PATH_ASL_YESORNO = os.path.join(BASE_DIR, 'handML/model', 'model_asl_yesorno.keras')
+MODEL_PATH_CSL = os.path.join(BASE_DIR, 'handML/model', 'model_csl.keras')
+MODEL_PATH_CSL_HEADCNT = os.path.join(BASE_DIR, 'handML/model', 'model_csl_headcnt.keras')
+MODEL_PATH_CSL_NUM = os.path.join(BASE_DIR, 'handML/model', 'model_csl_num.keras')
+MODEL_PATH_CSL_YESORNO = os.path.join(BASE_DIR, 'handML/model', 'model_csl_yesorno.keras')
 
 ASGI_APPLICATION = "config.asgi.application"
 
@@ -69,6 +76,7 @@ INSTALLED_APPS = [
     'multiLanguage.apps.LanguageConfig',
     'ticket.apps.TicketConfig',
     'general.apps.GeneralConfig',
+    'video_stream.apps.VideoStreamConfig',
 ]
 
 MIDDLEWARE = [
@@ -181,6 +189,13 @@ LOGGING = {
     'root': {
         'handlers': ['console'],
         'level': 'INFO',
+    },
+    'loggers': {
+        'django.server': {
+            'handlers': ['console'],
+            'level': 'WARNING',  # Change this line
+            'propagate': True,
+        },
     },
 }
 

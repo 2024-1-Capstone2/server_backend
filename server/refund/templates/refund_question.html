@@ -7,38 +7,46 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" href="{% static 'css/one/slide-3.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/one/slide-2.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/one/slide-.css' %}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
+    <title>질문(환불)</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script src="{% static 'js/config.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-      <style>
+    <style>
     #video{
       display: none;
     }
     .rectangle-parent14 {
-    position: relative;
-}
+        position: relative;
+    }
 
-#output {
+    .staff{
+      text-align: center;
+    }
+
+    #output {
     position: absolute;
       top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-}
+  }
   </style>
   </head>
-  <body>
+  <body style="">
     <div class="slide-4">
       <div class="slide-child1"></div>
       <div class="slide-child2"></div>
-      <div class="cam3">CAM</div>
+      <div class="cam3"></div>
       <div class="rectangle-parent10">
         <div class="frame-child13"></div>
         <div class="frame-child14"></div>
@@ -47,21 +55,6 @@
       </div>
       <img class="slide-child3" alt=""
            src="{% static 'image/one/group-21@2x.png' %}" />
-
-<!--      <div class="if-the-sentence-container4">-->
-<!--        <p class="if-the-sentence4">-->
-<!--          {% trans "If the sentence displayed on the screen was not what you intended," %}-->
-<!--        </p>-->
-<!--        <p class="look-at-the4">-->
-<!--          {% trans "look at the camera and use the sign word 'again'." %}-->
-<!--        </p>-->
-<!--      </div>-->
-      <img
-        class="slide-child4"
-        loading="lazy"
-        alt=""
-        src="{% static 'image/one/group-21@2x.png' %}"
-      />
 
       <div class="number-request-content-wrapper">
         <div class="number-request-content">
@@ -79,47 +72,38 @@
             </div>
           </div>
           <div class="bus-number-prompt add-message">
-<!--            <div class="schedule-prompt">-->
-<!--              <div class="rectangle-parent11">-->
-<!--                <div class="frame-child15"></div>-->
-<!--                <div class="please-tell-us">Would you like to purchase a new ticket</div>-->
-<!--              </div>-->
-<!--            </div>-->
-            <div class="rectangle-parent12">
-              <div class="frame-child16"></div>
-              <div class="you-want-to-container">
-                <p class="you-want-to">If you would like to issue to a ticket,</p>
+            <div class="schedule-prompt">
+              <div class="rectangle-parent11" style="align-items: center;">
+                <div class="frame-child15"></div>
+                <div class="please-tell-us staff text-xs">{% trans "Purchase ticket?" %}</div>
+              </div>
+            </div>
+            <div class="schedule-prompt">
+              <div class="rectangle-parent11" style="align-items: center;">
+                <div class="frame-child15"></div>
+                <div class="please-tell-us">
+                  <div class="text-xs text-center items-center new-message">
+                  &nbsp;
+                </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section class="frame-parent6">
-        <div class="rectangle-parent13">
+      <section class="frame-parent6 ">
+        <div class="rectangle-parent13 gap-[3rem]">
           <div class="frame-child17"></div>
-          <div class="error-message">
-            <div class="rectangle-parent14">
+          <div class="error-message gap-[2rem]">
+            <div class="rectangle-parent14 ">
               <video id="video" autoplay></video>
               <canvas id="output"></canvas>
             </div>
-<!--            <div class="h-[31.25rem] w-[56.25rem] relative max-w-full">-->
-<!--              <video id="video" autoplay></video>-->
-<!--              <canvas id="output"></canvas>-->
-<!--            </div>-->
           </div>
-          <div class="if-the-sentence-container5">
-            <p class="if-the-sentence5">
-              {% trans "If the sentence displayed on the screen was not what you intended," %}
-            </p>
-            <p class="look-at-the5">
-              {% trans "look at the camera and use the sign word 'again'." %}
-            </p>
-          </div>
-        </div>
-        <div class="frame-wrapper4">
-          <div class="rectangle-parent15">
+          <div class="mt-1 frame-wrapper4">
+          <div class="rectangle-parent15" style="align-items: center">
             <div class="frame-child19"></div>
-            <button class="support-option">
+            <button class="support-option mr-2">
               <div class="support-option-child"></div>
               <img
                 class="image-10-icon3"
@@ -127,40 +111,35 @@
                 src="{% static 'image/one/image-10@2x.png' %}"
               />
             </button>
-            <div class="detect_action"></div>
+            <div class="detect_action text-lg"></div>
           </div>
+            </div>
+          {% get_current_language as LANGUAGE_CODE %}
+        <footer class="feedback-prompt">
+
+          <div class="{% if LANGUAGE_CODE == 'en' %}feedback-container{% elif LANGUAGE_CODE == 'zh-hans' %}feedback-container2{% endif %}">
+            <img
+              class="feedback-container-child"
+              loading="lazy"
+              alt=""
+              src="{% static 'image/one/group-21@2x.png' %}"
+            />
+            <div class="if-the-sentence-displayed-on-t-wrapper">
+              <div class="if-the-sentence-container2">
+                <p class="if-the-sentence2">
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
+                </p>
+                <p class="look-at-the2">
+                  {% trans "look at the camera and use the sign word 'again'." %}
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
         </div>
       </section>
     </div>
-        <script>
-          function addMessageToRefundQuestion(message) {
-            const add_messageElement = document.querySelector('.add-message');
-
-            // 새로운 'rectangle-parent12' div 요소를 생성합니다.
-            var newParentElement = document.createElement('div');
-            newParentElement.className = 'rectangle-parent12';
-
-            // 새로운 'frame-child16' div 요소를 생성합니다.
-            var newChildElement1 = document.createElement('div');
-            newChildElement1.className = 'frame-child16';
-
-            // 새로운 'you-want-to-container' div 요소를 생성합니다.
-            var newChildElement2 = document.createElement('div');
-            newChildElement2.className = 'you-want-to-container';
-
-            // 메시지를 포함하는 'p' 요소를 생성합니다.
-            var newMessageElement = document.createElement('p');
-            newMessageElement.className = 'you-want-to';
-            newMessageElement.textContent = message;  // 메시지로 대체합니다.
-
-            // 생성한 요소들을 적절한 위치에 추가합니다.
-            newChildElement2.appendChild(newMessageElement);
-            newParentElement.appendChild(newChildElement1);
-            newParentElement.appendChild(newChildElement2);
-            add_messageElement.appendChild(newParentElement);
-          }
-    </script>
-    <script src="{% static 'js/ml.js' %}"></script>
+  <script src="{% static 'js/ml.js' %}"></script>
     <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

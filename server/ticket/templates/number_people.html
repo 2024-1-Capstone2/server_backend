@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,16 +13,40 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/config.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <style>
+    #video{
+      display: none;
+    }
+    .rectangle-parent14 {
+        position: relative;
+    }
+
+    .staff{
+      text-align: center;
+    }
+
+    #output {
+    position: absolute;
+      top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  </style>
   </head>
   <body>
     <div
       class="w-full relative bg-whitesmoke-300 overflow-hidden flex flex-row items-start justify-start py-[1.562rem] pr-[1.312rem] pl-[2.125rem] box-border gap-[2.187rem] leading-[normal] tracking-[normal] text-center text-[1.25rem] text-black font-inter mq450:gap-[1.063rem] mq1275:flex-wrap"
     >
       <div
-        class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.437rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
+        class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.375rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
       >
         <div
-          class="self-stretch flex flex-col items-start justify-start gap-[2.812rem] max-w-full mq450:gap-[1.375rem]"
+          class="self-stretch flex flex-col items-start justify-start gap-[2.562rem] max-w-full mq450:gap-[1.375rem]"
         >
           <div
             class="w-[24.938rem] flex flex-row items-start justify-center pt-[0rem] px-[1.25rem] pb-[0.812rem] box-border max-w-full"
@@ -34,54 +59,57 @@
             />
           </div>
           <div
-            class="flex flex-col items-start justify-start gap-[1.875rem] max-w-full"
+            class="self-stretch flex flex-col items-center justify-center py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full add-message"
           >
             <div
-              class="flex flex-row items-start justify-start relative max-w-full"
-            >
-              <img
-                class="h-[3.125rem] w-[1.25rem] absolute !m-[0] top-[-2.125rem] left-[calc(50%_-_10px)] z-[1]"
-                loading="lazy"
-                alt=""
-                src="{% static 'image/one/hand-shape.svg' %}"
-              />
-
-              <div
-                class="rounded-mini bg-white flex flex-row items-start justify-start pt-[1.687rem] pb-[1.812rem] pr-[0.625rem] pl-[1.312rem] box-border whitespace-nowrap max-w-full"
-              >
-                <div
-                  class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
-                ></div>
-                <div class="relative tracking-[0.1em] z-[1]">
-                  Check bus information and fares
-                </div>
-              </div>
-            </div>
-            <div
-              class="rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] px-[2.812rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
             >
               <div
                 class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
               ></div>
               <div
-                class="h-[3rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
               >
-                <p class="m-0">Please tell us the type</p>
-                <p class="m-0">and number of passengers.</p>
+                <p class="m-0">{% trans "Please state the number of bus passengers." %}</p>
+              </div>
+            </div>
+            <div
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="text-xs text-center items-center new-message">
+                  &nbsp;
+                </div>
               </div>
             </div>
           </div>
-          <textarea
-            class="[border:none] bg-black h-[14.25rem] w-auto [outline:none] self-stretch flex flex-row items-start justify-start py-[6.375rem] px-[11.187rem] box-border font-inter text-[1.25rem] text-white"
-            placeholder="CAM"
-            rows="{11}"
-            cols="{21}"
-          >
-          </textarea>
+          <div class="h-[14.25rem] w-[25.25rem] relative max-w-full">
+            <video id="video" autoplay></video>
+            <canvas id="output"></canvas>
+          </div>
+          <div
+              class="self-stretch text-white rounded-mini bg-darkslateblue-200 flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="detect_action text-base">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       <footer
-        class="flex-1 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[2.5rem] px-[2.937rem] pb-[1.937rem] box-border gap-[8.125rem] min-w-[44.688rem] max-w-full text-right text-[2.188rem] text-black font-inter mq750:gap-[2rem] mq1100:gap-[4.063rem] mq1100:pt-[1.625rem] mq1100:px-[1.438rem] mq1100:pb-[1.25rem] mq1100:box-border mq1100:min-w-full mq450:gap-[1rem] mq450:pt-[1.25rem] mq450:box-border"
+        class="flex-1 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[2.5rem] px-[2.937rem] pb-[1.937rem] box-border gap-[4.525rem] min-w-[44.688rem] max-w-full text-[2.188rem] text-black font-inter mq750:gap-[2rem] mq1100:gap-[4.063rem] mq1100:pt-[1.625rem] mq1100:px-[1.438rem] mq1100:pb-[1.25rem] mq1100:box-border mq1100:min-w-full mq450:gap-[1rem] mq450:pt-[1.25rem] mq450:box-border"
       >
         <div
           class="w-[68.75rem] h-[53.125rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full"
@@ -111,7 +139,7 @@
                   <h1
                     class="m-0 relative text-inherit tracking-[0.1em] font-medium font-inherit z-[1] mq750:text-[1.75rem] mq450:text-[1.313rem]"
                   >
-                    Bus schedule
+                    {% trans "Bus schedule" %}
                   </h1>
                 </div>
               </div>
@@ -124,7 +152,7 @@
                   <div
                     class="relative tracking-[0.1em] font-semibold inline-block min-w-[5.5rem] z-[1] mq750:text-[1.5rem] mq450:text-[1.125rem]"
                   >
-                    6001
+                    {{bus_number}}
                   </div>
                 </div>
                 <div
@@ -148,7 +176,7 @@
                       <div
                         class="self-stretch relative tracking-[0.1em] font-semibold z-[2]"
                       >
-                        2024-05-06
+                        {{date}}
                       </div>
                     </div>
                     <div
@@ -166,7 +194,7 @@
                       <div
                         class="self-stretch relative tracking-[0.1em] font-semibold whitespace-nowrap z-[1]"
                       >
-                        06:40
+                        {{time}}
                       </div>
                     </div>
                   </div>
@@ -175,73 +203,76 @@
             </div>
           </div>
           <div
-            class="self-stretch flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[0.875rem] box-border gap-[2.187rem] max-w-full text-[0.938rem] mq750:gap-[1.063rem]"
+            class="self-stretch flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[0.875rem] box-border gap-[2.187rem] max-w-full text-[0.938rem] mq750:gap-[1.063rem]"
           >
             <div
-              class="self-stretch bg-whitesmoke-300 flex flex-row items-start justify-between pt-[0.937rem] pb-[1.062rem] pr-[5rem] pl-[5.937rem] box-border max-w-full gap-[1.25rem] z-[1] mq750:pl-[1.438rem] mq750:box-border mq1100:flex-wrap mq1100:pl-[2.938rem] mq1100:pr-[2.5rem] mq1100:box-border"
+              class="self-stretch bg-whitesmoke-300 flex flex-row text-center items-start justify-between pt-[0.937rem] pb-[1.062rem] pr-[5rem] pl-[5.937rem] box-border max-w-full gap-[1.25rem] z-[1] mq750:pl-[1.438rem] mq750:box-border mq1100:flex-wrap mq1100:pl-[2.938rem] mq1100:pr-[2.5rem] mq1100:box-border"
             >
               <div
                 class="h-[3.188rem] w-[62.313rem] relative bg-whitesmoke-300 hidden max-w-full"
               ></div>
               <div
-                class="w-[11.688rem] flex flex-col items-start justify-start"
+                class="w-[11.688rem] flex flex-col items-center justify-center"
               >
                 <div
                   class="relative tracking-[0.1em] inline-block min-w-[5.313rem] z-[2]"
                 >
-                  Departure
+                  {% trans "Departure" %}
                 </div>
               </div>
               <div
-                class="w-[10.875rem] flex flex-col items-start justify-start"
+                class="w-[10.875rem] flex flex-col items-center justify-center"
               >
                 <div
                   class="relative tracking-[0.1em] inline-block min-w-[5rem] z-[2]"
                 >
-                  bus class
+                  {% trans "Bus class" %}
                 </div>
               </div>
               <div
                 class="relative tracking-[0.1em] inline-block min-w-[5.688rem] z-[2]"
               >
-                total seats
+                {% trans "Total seats" %}
               </div>
               <div
                 class="w-[11.875rem] relative tracking-[0.1em] inline-block shrink-0 z-[2]"
               >
-                <p class="m-0">remaining seats</p>
+                <p class="m-0">{% trans "Remaining seats" %}</p>
               </div>
             </div>
             <div
-              class="w-[56.688rem] flex flex-row items-start justify-start py-[0rem] px-[3.562rem] box-border max-w-full mq1100:pl-[1.75rem] mq1100:pr-[1.75rem] mq1100:box-border"
+              class="self-stretch bg-white flex flex-row items-start justify-between pt-[0.937rem] pb-[1.062rem] pr-[5rem] pl-[5.937rem] box-border max-w-full gap-[1.25rem] z-[1] mq750:pl-[1.438rem] mq750:box-border mq1100:flex-wrap mq1100:pl-[2.938rem] mq1100:pr-[2.5rem] mq1100:box-border"
             >
               <div
-                class="flex-1 flex flex-row items-start justify-between max-w-full gap-[1.25rem] mq750:flex-wrap"
+                class="h-[3.188rem] w-[62.313rem] relative bg-whitesmoke-300 hidden max-w-full"
+              ></div>
+              <div
+                class="w-[11.688rem] flex flex-col items-center justify-center"
               >
-                <div class="relative tracking-[0.1em] z-[1]">
-                  Incheon Terminal 2
-                </div>
                 <div
-                  class="w-[14.5rem] flex flex-col items-start justify-start pt-[0.062rem] px-[0rem] pb-[0rem] box-border"
+                  class="relative tracking-[0.1em] inline-block min-w-[5.313rem] z-[2]"
                 >
-                  <div class="relative tracking-[0.1em] z-[1]">
-                    Out-of-town honors
-                  </div>
+                  {% trans "Incheon Terminal 1" %}
                 </div>
+              </div>
+              <div
+                class="w-[10.875rem] flex flex-col items-center justify-center"
+              >
                 <div
-                  class="w-[8.688rem] flex flex-col items-start justify-start pt-[0.312rem] px-[0rem] pb-[0rem] box-border"
+                  class="relative tracking-[0.1em] inline-block min-w-[5rem] z-[2]"
                 >
-                  <div class="relative tracking-[0.1em] z-[1]">
-                    <p class="m-0">28</p>
-                  </div>
+                  {% trans "Excellent Bus" %}
                 </div>
-                <div
-                  class="flex flex-col items-start justify-start pt-[0.312rem] px-[0rem] pb-[0rem]"
-                >
-                  <div class="relative tracking-[0.1em] z-[1]">
-                    <p class="m-0">24</p>
-                  </div>
-                </div>
+              </div>
+              <div
+                class="relative items-center justify-center tracking-[0.1em] inline-block min-w-[5.688rem] z-[2]"
+              >
+                {{total_seats}}
+              </div>
+              <div
+                class="w-[11.875rem] items-center justify-center relative tracking-[0.1em] inline-block shrink-0 z-[2]"
+              >
+                <p class="m-0">{{remaining_seats}}</p>
               </div>
             </div>
           </div>
@@ -264,7 +295,7 @@
                 <div
                   class="self-stretch relative tracking-[0.1em] font-semibold z-[1] mq450:text-[1rem]"
                 >
-                  Fare
+                  {% trans "Fare" %}
                 </div>
               </div>
             </div>
@@ -283,7 +314,7 @@
                   <div
                     class="relative tracking-[0.1em] inline-block min-w-[4.563rem] z-[2]"
                   >
-                    Common
+                    {% trans "Common" %}
                   </div>
                   <div
                     class="flex flex-row items-start justify-start py-[0rem] pr-[0.125rem] pl-[0.25rem]"
@@ -291,7 +322,7 @@
                     <div
                       class="relative tracking-[0.1em] inline-block min-w-[4.188rem] z-[2]"
                     >
-                      Student
+                      {% trans "Student" %}
                     </div>
                   </div>
                   <div
@@ -300,41 +331,30 @@
                     <div
                       class="relative tracking-[0.1em] inline-block min-w-[2.75rem] z-[2]"
                     >
-                      Child
+                      {% trans "Child" %}
                     </div>
                   </div>
                 </div>
                 <div
-                  class="flex flex-col items-start justify-start pt-[1.187rem] px-[0rem] pb-[0rem]"
+                  class="w-[17.75rem] bg-white flex flex-col items-end justify-start pt-[1.75rem] pb-[1.312rem] pr-[1.25rem] pl-[1.312rem] box-border gap-[2.092rem] z-[1]"
                 >
                   <div
-                    class="flex flex-col items-start justify-start gap-[2.062rem]"
+                    class="w-[17.75rem] h-[10.688rem] relative bg-whitesmoke-300 hidden"
+                  ></div>
+                  <div
+                    class="relative text-left tracking-[0.1em] inline-block min-w-[4.563rem] z-[2]"
                   >
-                    <div
-                      class="flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.062rem]"
-                    >
-                      <div
-                        class="relative tracking-[0.1em] inline-block min-w-[4.563rem] z-[1]"
-                      >
-                        W 17000
-                      </div>
-                    </div>
-                    <div
-                      class="flex flex-col items-end justify-start gap-[1rem]"
-                    >
-                      <div
-                        class="flex flex-row items-start justify-end py-[0rem] pr-[0.062rem] pl-[0rem]"
-                      >
-                        <div class="relative tracking-[0.1em] z-[1]">
-                          <p class="m-0">W 12000</p>
-                        </div>
-                      </div>
-                      <div
-                        class="relative tracking-[0.1em] inline-block min-w-[4.063rem] z-[1]"
-                      >
-                        W 9000
-                      </div>
-                    </div>
+                    ₩ {{adult_fare}}
+                  </div>
+                   <div
+                    class="relative text-left tracking-[0.1em] inline-block min-w-[4.563rem] z-[2]"
+                  >
+                    ₩ {{student_fare}}
+                  </div>
+                   <div
+                    class="relative text-left tracking-[0.1em] inline-block min-w-[4.563rem] z-[2]"
+                  >
+                    ₩ {{child_fare}}
                   </div>
                 </div>
               </div>
@@ -359,11 +379,10 @@
             >
               <div class="self-stretch relative tracking-[0.1em] z-[1]">
                 <p class="m-0">
-                  If the sentence displayed on the screen was not what you
-                  intended,
+                  {% trans "If the sentence displayed on the screen was not what you intended," %}
                 </p>
                 <p class="m-0">
-                  look at the camera and use the sign word 'again'.
+                  {% trans "look at the camera and use the sign word 'again'." %}
                 </p>
               </div>
             </div>
@@ -371,5 +390,7 @@
         </div>
       </footer>
     </div>
+    <script src="{% static 'js/ml.js' %}"></script>
+    <script src="{% static 'js/socket.js' %}"></script>
   </body>
 </html>

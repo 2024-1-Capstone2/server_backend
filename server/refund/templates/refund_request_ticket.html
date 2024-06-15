@@ -5,15 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-
+    <title>티켓 요청</title>
     <link rel="stylesheet" href="{% static 'css/one/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/one/slide-2.css' %}" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/config.js' %}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
@@ -50,23 +51,6 @@
           <div
             class="self-stretch flex flex-col items-start justify-start py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full add-message"
           >
-<!--            <div-->
-<!--              class="self-stretch flex flex-row items-start justify-start relative max-w-full"-->
-<!--            >-->
-<!--              <div-->
-<!--                class="flex-1 rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] pr-[1.062rem] pl-[1.625rem] box-border max-w-full"-->
-<!--              >-->
-<!--                <div-->
-<!--                  class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"-->
-<!--                ></div>-->
-<!--                <div-->
-<!--                  class="w-[22.313rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"-->
-<!--                >-->
-<!--                  <p class="m-0">If you have a ticket, please tell</p>-->
-<!--                  <p class="m-0">“Yes” and submit the ticket.</p>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
             <div
               class="self-stretch rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
             >
@@ -80,16 +64,29 @@
                 <p class="m-0">please tell “No”.</p>
               </div>
             </div>
-          </div>
-
-          <div class="h-[14.25rem] w-[25.25rem] relative max-w-full">
-            <video id="video" autoplay></video>
-            <canvas id="output"></canvas>
+            <div class="h-[14.25rem] w-[25.25rem] relative max-w-full">
+              <video id="video" autoplay></video>
+              <canvas id="output"></canvas>
+            </div>
+            <div
+              class="text-white self-stretch rounded-mini bg-darkslateblue-200 flex flex-row items-start justify-start py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="detect_action text-base">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <section
-        class="flex-1 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[2.437rem] pb-[1.812rem] pr-[3.312rem] pl-[3.25rem] box-border gap-[4.375rem] min-w-[44.688rem] max-w-full text-left text-[1.875rem] text-black font-inter mq750:gap-[1.063rem] mq1100:gap-[2.188rem] mq1100:pt-[1.563rem] mq1100:px-[1.625rem] mq1100:pb-[1.25rem] mq1100:box-border mq1100:min-w-full mq450:pt-[1.25rem] mq450:box-border"
+        class="flex-1 shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white flex flex-col items-end justify-start pt-[2.437rem] pb-[1.812rem] pr-[3.312rem] pl-[3.25rem] box-border gap-[4.275rem] min-w-[44.688rem] max-w-full text-left text-[1.875rem] text-black font-inter mq750:gap-[1.063rem] mq1100:gap-[2.188rem] mq1100:pt-[1.563rem] mq1100:px-[1.625rem] mq1100:pb-[1.25rem] mq1100:box-border mq1100:min-w-full mq450:pt-[1.25rem] mq450:box-border"
       >
         <div
           class="w-[68.75rem] h-[52.938rem] relative shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] rounded-xl bg-white hidden max-w-full"
@@ -116,45 +113,41 @@
                 <h2
                   class="m-0 relative text-inherit tracking-[0.1em] font-medium font-inherit whitespace-nowrap z-[1]"
                 >
-                  Ticket refund precautions
+                  {% trans "Ticket refund precautions" %}
                 </h2>
               </div>
             </div>
           </header>
-          <div
-            class="self-stretch bg-silver flex flex-row items-end justify-end py-[13.625rem] px-[17.187rem] box-border min-h-[34.25rem] max-w-full z-[1] mq750:py-[8.875rem] mq750:px-[4.25rem] mq750:box-border mq1100:pl-[8.563rem] mq1100:pr-[8.563rem] mq1100:box-border"
-          >
-            <div
-              class="h-[34.25rem] w-[62.188rem] relative bg-silver hidden max-w-full"
-            ></div>
-            <h3
-              class="m-0 w-[23.813rem] relative text-inherit tracking-[0.1em] font-medium font-inherit inline-block shrink-0 max-w-full z-[2] mq750:text-[1.5rem] mq450:text-[1.125rem]"
-            >
-              티켓 환불 안내 사항 &gt; 영어
-            </h3>
-          </div>
+            {% if language_code == 'en' %}
+              <img class="h-full w-full object-cover relative z-10"
+                  loading="lazy"
+                  alt=""
+                  src="{% static 'image/ticket(en).png' %}"
+              />
+            {% elif language_code == 'zh-hans' %}
+              <img class="h-full w-full object-cover relative z-10"
+                      loading="lazy"
+                      alt=""
+                      src="{% static 'image/ticket(zh).png' %}"
+              />
+          {% endif %}
         </div>
-        <footer
-          class="w-[41.688rem] flex flex-row items-start justify-end py-[0rem] px-[0.687rem] box-border max-w-full text-right text-[0.938rem] text-black font-inter"
-        >
-          <div
-            class="flex-1 flex flex-row items-start justify-start gap-[0.687rem] max-w-full mq750:flex-wrap"
-          >
+         {% get_current_language as LANGUAGE_CODE %}
+        <footer class="feedback-prompt">
+
+          <div class="{% if LANGUAGE_CODE == 'en' %}feedback-container{% elif LANGUAGE_CODE == 'zh-hans' %}feedback-container2{% endif %}">
             <img
-              class="h-[3.125rem] w-[3.125rem] relative object-cover z-[1]"
+              class="feedback-container-child"
               loading="lazy"
               alt=""
               src="{% static 'image/one/group-21@2x.png' %}"
             />
-
-            <div
-              class="flex-1 flex flex-col items-start justify-start pt-[0.437rem] px-[0rem] pb-[0rem] box-border min-w-[23.75rem] max-w-full mq750:min-w-full"
-            >
-              <div class="self-stretch relative tracking-[0.1em] z-[1]">
-                <p class="m-0">
+            <div class="if-the-sentence-displayed-on-t-wrapper">
+              <div class="if-the-sentence-container2">
+                <p class="if-the-sentence2">
                   {% trans "If the sentence displayed on the screen was not what you intended," %}
                 </p>
-                <p class="m-0">
+                <p class="look-at-the2">
                   {% trans "look at the camera and use the sign word 'again'." %}
                 </p>
               </div>
@@ -163,40 +156,6 @@
         </footer>
       </section>
     </div>
-    <script>
-      function addMessageToRefundTicket(message) {
-        const add_messageElement = document.querySelector('.add-message');
-
-        // 새로운 'self-stretch' div 요소를 생성합니다.
-        var newParentElement = document.createElement('div');
-        newParentElement.className = 'self-stretch flex flex-row items-start justify-start relative max-w-full';
-
-        // 새로운 'flex-1' div 요소를 생성합니다.
-        var newChildElement1 = document.createElement('div');
-        newChildElement1.className = 'flex-1 rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] pr-[1.062rem] pl-[1.625rem] box-border max-w-full';
-
-        // 'h-[5rem]' div 요소를 생성합니다.
-        var newChildElement2 = document.createElement('div');
-        newChildElement2.className = 'h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full';
-
-        // 'w-[22.313rem]' div 요소를 생성합니다.
-        var newChildElement3 = document.createElement('div');
-        newChildElement3.className = 'w-[22.313rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]';
-
-        // 메시지를 포함하는 'p' 요소를 생성합니다.
-        var newMessageElement = document.createElement('p');
-        newMessageElement.className = 'm-0';
-        newChildElement2.style.textAlign = 'center';
-        newMessageElement.textContent = message;  // 메시지로 대체합니다.
-
-        // 생성한 요소들을 적절한 위치에 추가합니다.
-        newChildElement3.appendChild(newMessageElement);
-        newChildElement1.appendChild(newChildElement2);
-        newChildElement1.appendChild(newChildElement3);
-        newParentElement.appendChild(newChildElement1);
-        add_messageElement.appendChild(newParentElement);
-      }
-    </script>
     <script src="{% static 'js/ml.js' %}"></script>
     <script src="{% static 'js/socket.js' %}"></script>
   </body>

@@ -109,7 +109,7 @@
 }
 .deaf-info-top {
   align-self: stretch;
-  gap: 3.625rem;
+  gap: 1.875rem;
 }
 .slide-container1 {
   width: 25rem;
@@ -206,24 +206,31 @@
   z-index: 1;
 }
 .feedback-container,
+.feedback-container2,
 .if-the-sentence-displayed-on-t-wrapper {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  max-width: 100%;
 }
 .if-the-sentence-displayed-on-t-wrapper {
   flex: 1;
   flex-direction: column;
   padding: 0.437rem 0 0;
   box-sizing: border-box;
-  min-width: 23.75rem;
+  min-width: 10.75rem;
 }
 .feedback-container {
   width: 40.313rem;
   flex-direction: row;
   gap: 0.687rem;
 }
+
+.feedback-container2 {
+  width: 22.313rem;
+  flex-direction: row;
+  gap: 0.687rem;
+}
+
 .feedback-prompt,
 .sentence-check-top,
 .slide-2 {
@@ -299,6 +306,7 @@
   .if-the-sentence-displayed-on-t-wrapper {
     min-width: 100%;
   }
+  .feedback-container2,
   .feedback-container {
     flex-wrap: wrap;
   }

@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from django.utils import translation
 from django.conf import settings
 from .busData import getBusInfo, test, addBusStop, addCity, addDistrict
+from busInfo.models import City, District, BusStop, TimeTable, Bus
+from datetime import datetime
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -106,10 +108,40 @@ def bus_schedule_request(request):
 
 def bus_schedule(request):
     translation.activate(settings.LANGUAGE_CODE)
+    # BusStop 인스턴스 가져오기
+    bus_stop = BusStop.objects.get(name='Sinsa Station')
+
+    # 해당 BusStop 인스턴스에 연결된 모든 TimeTable 인스턴스를 가져옵니다.
+    timetables = TimeTable.objects.filter(arrival_bus_stop=bus_stop)
+
+    # 각 TimeTable 인스턴스에 대해
+    bus = timetables.first().bus
+    timetables = timetables.order_by('time')
+
+    now = datetime.now().time()
+    timetables = timetables.filter(time__gte=now).order_by('time')
+
+    # timetables를 10개씩 분할하면서 time 필드만 가져오고 시간,분만 표현
+    chunks = [[item.time.strftime("%H:%M") for item in timetables[i:i + 10]] for i in range(0, len(timetables), 10)]
+
+    # 각 분할된 리스트의 길이가 10이 아닐 경우, 리스트에 빈 문자열(" ")을 추가
+    for chunk in chunks:
+        while len(chunk) < 10:
+            chunk.append(" ")
+
+    date = datetime.now().strftime("%Y- %m- %d")
+
+    first_timetable = timetables.first()
+    bus_number = first_timetable.bus.number
+
     number1 = [i for i in range(1, 11)]
     number2 = [i for i in range(11, 21)]
     number3 = [i for i in range(21, 31)]
-    return render(request, 'schedule/bus_schedule.html', {'number1': number1, 'number2': number2, 'number3': number3})
+
+    return render(request, 'schedule/bus_schedule.html', {
+    'bus_number': bus_number,
+    'timetables': timetables, 'date': date, 'chunks': chunks,
+    'number1': number1, 'number2': number2, 'number3': number3})
 
 def temp(request):
     # addDistrict()

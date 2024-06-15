@@ -47,6 +47,9 @@ msgstr "可选择区域"
 msgid "number"
 msgstr "号码"
 
+msgid "Number"
+msgstr "号码"
+
 msgid "region name"
 msgstr "区域名称"
 
@@ -57,6 +60,9 @@ msgid "look at the camera and use the sign word 'again'."
 msgstr "请看摄像头并使用手势词'再来一次'。"
 
 msgid "bus stop"
+msgstr "公交车站"
+
+msgid "Bus stop"
 msgstr "公交车站"
 
 msgid "Selectable bus stop"
@@ -77,6 +83,9 @@ msgstr "交通公司"
 msgid "(contact information)"
 msgstr "(联系方式)"
 
+msgid "Please select your arrival stop."
+msgstr "请选择您的到达站。"
+
 msgid "Bus stop map"
 msgstr "公交车站地图"
 
@@ -89,33 +98,100 @@ msgstr "第一班车"
 msgid "last bus"
 msgstr "最后一班车"
 
-# temp -----------
-msgid "Please go to the infomation desk."
-msgstr "请到问讯台去."
+msgid "Departure"
+msgstr "出发"
+
+msgid "Bus class"
+msgstr "公交车类型"
+
+msgid "Total"
+msgstr "总计"
+
+msgid "Total seats"
+msgstr "总座位"
+
+msgid "Remaining seats"
+msgstr "剩余座位"
+
+msgid "Check the bus schedule."
+msgstr "查看公交车时间表。"
+
+msgid "Incheon Terminal 1"
+msgstr "仁川1号航站楼"
+
+msgid "Excellent Bus"
+msgstr "优质公交车"
+
+msgid "Please state the number of bus passengers."
+msgstr "请告诉我们公交车乘客的人数。"
+
+msgid "Common"
+msgstr "普通"
+
+msgid "Student"
+msgstr "学生"
+
+msgid "Child"
+msgstr "儿童"
+
+msgid "Check bus information"
+msgstr "查看公交车信息"
+
+msgid "Check bus information and fares"
+msgstr "查看公交车信息和车费"
+
+msgid "Please contact a counselor"
+msgstr "请联系咨询员"
+
+msgid "Please try sign language again"
+msgstr "请再试一次手语"
 
 msgid "The screen will close after 15s"
 msgstr "屏幕将在15秒后关闭"
 
-msgid "Please contact a counselor"
-msgstr "请联系辅导员"
-
-msgid "Please try sign language again"
-msgstr "请再次尝试手语"
-
 msgid "Please tell us the bus number"
 msgstr "请告诉我们公交车号码"
 
-msgid "you want to know"
-msgstr "你想知道"
+msgid "Timetable closes after 30s"
+msgstr "时间表在30秒后关闭"
 
-msgid "the bus schedule for"
-msgstr "公交车时间表"
+msgid "Ticket refund precautions"
+msgstr "退票注意事项"
 
-msgid "Please board the {{ bus_number }} bus"
-msgstr "请搭乘{{ bus_number }}公交车"
+msgid "Purchase ticket?"
+msgstr "购买车票？"
 
-msgid "The map will close after 30s"
-msgstr "地图将在30秒后关闭"
+msgid "If you do not have a ticket,"
+msgstr "如果您没有车票,"
 
-msgid "At bus stop {{ bus_stop }}"
-msgstr "在{{ bus_stop }}公交车站"
+msgid  "please tell “No”."
+msgstr "请告诉“不是”."
+
+msgid "Purchase information"
+msgstr "购买信息"
+
+msgid "Seat number"
+msgstr "座位号"
+
+msgid "Arrival time"
+msgstr "到达时间"
+
+msgid "Bus number"
+msgstr "公交车号码"
+
+msgid "Check purchase information"
+msgstr "查看购买信息"
+
+msgid "HeadCount"
+msgstr "人数"
+
+msgid "Fare"
+msgstr "车费"
+
+msgid "Total fare"
+msgstr "总车费"
+
+# 지역
+msgid "Seoul"
+msgstr "首尔"
+

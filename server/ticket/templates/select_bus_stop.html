@@ -36,7 +36,7 @@
         class="w-[25.625rem] flex flex-col items-start justify-start pt-[0.375rem] px-[0rem] pb-[0rem] box-border min-w-[25.625rem] max-w-full mq750:min-w-full mq1275:flex-1"
       >
         <div
-          class="self-stretch flex flex-col items-start justify-start gap-[2.812rem] max-w-full mq450:gap-[1.375rem]"
+          class="self-stretch flex flex-col items-start justify-start gap-[2.562rem] max-w-full mq450:gap-[1.375rem]"
         >
           <div
             class="w-[24.938rem] flex flex-row items-start justify-center pt-[0rem] px-[1.25rem] pb-[0.812rem] box-border max-w-full"
@@ -49,10 +49,10 @@
             />
           </div>
           <div
-            class="self-stretch flex flex-col items-start justify-start py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full add-message"
+            class="self-stretch flex flex-col items-center justify-center py-[0rem] pr-[0.625rem] pl-[0rem] box-border gap-[1.875rem] max-w-full add-message"
           >
             <div
-              class="self-stretch rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
             >
               <div
                 class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
@@ -60,16 +60,42 @@
               <div
                 class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
               >
-                <p class="m-0">If you do not have a ticket,</p>
-                <p class="m-0">please tell “No”.</p>
+                <p class="m-0">{% trans "Please select your arrival stop." %}</p>
+              </div>
+            </div>
+            <div
+              class="self-stretch rounded-mini bg-white flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="text-xs text-center items-center new-message">
+                  &nbsp;
+                </div>
               </div>
             </div>
           </div>
-
           <div class="h-[14.25rem] w-[25.25rem] relative max-w-full">
             <video id="video" autoplay></video>
             <canvas id="output"></canvas>
           </div>
+          <div
+              class="self-stretch text-white rounded-mini bg-darkslateblue-200 flex flex-row items-center justify-center py-[1rem] px-[2.75rem] box-border max-w-full mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border"
+            >
+              <div
+                class="h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full"
+              ></div>
+              <div
+                class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
+              >
+                <div class="detect_action text-base">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
         </div>
       </div>
       <section
@@ -105,108 +131,39 @@
               </div>
             </div>
             <div
-              class="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.375rem] box-border max-w-full text-[0.938rem] text-white"
+              class="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.375rem] box-border max-w-full min-h-[21.5rem] text-[0.938rem] text-black"
             >
               <div
                 class="flex-1 flex flex-col items-start justify-start gap-[1.937rem] max-w-full mq750:gap-[0.938rem]"
               >
-                <nav
-                  class="m-0 self-stretch bg-whitesmoke-300 flex flex-row items-start justify-between py-[1rem] pr-[7.812rem] pl-[4.375rem] box-border max-w-full gap-[1.25rem] whitespace-nowrap z-[1] text-right text-[0.938rem] text-black font-inter mq750:flex-wrap mq750:pr-[1.938rem] mq750:box-border mq1100:pl-[2.188rem] mq1100:pr-[3.875rem] mq1100:box-border"
-                >
-                  <div
-                    class="h-[3.188rem] w-[58.938rem] relative bg-whitesmoke-300 hidden max-w-full"
-                  ></div>
-                  <div
-                    class="relative tracking-[0.1em] inline-block min-w-[4rem] z-[2]"
-                  >
-                    {% trans "number" %}
-                  </div>
-                  <div
-                    class="flex flex-col items-start justify-start py-[0rem] pr-[0.5rem] pl-[0rem]"
-                  >
-                    <div
-                      class="relative tracking-[0.1em] inline-block min-w-[6.563rem] z-[2]"
-                    >
-                      {% trans "region name" %}
-                    </div>
-                  </div>
-                  <div
-                    class="relative tracking-[0.1em] inline-block min-w-[4rem] z-[2]"
-                  >
-                    {% trans "number" %}
-                  </div>
-                  <div
-                    class="relative tracking-[0.1em] inline-block min-w-[6.563rem] z-[2]"
-                  >
-                    {% trans "region name" %}
-                  </div>
-                </nav>
-                <div
-                  class="w-[56rem] flex flex-row items-start justify-center py-[0rem] px-[1.25rem] box-border max-w-full"
-                >
-                  <div
-                    class="w-[45.25rem]  flex flex-row items-start justify-between gap-[1.25rem] max-w-full mq750:flex-wrap"
-                  >
-                    <div
-                      class="ml-16 w-[2.625rem] flex flex-col items-start justify-start py-[0rem] pr-[0.75rem] pl-[0rem] box-border gap-[2.875rem]"
-                    >
-                      {% for num in number %}
-                      <div class="self-stretch h-[1.875rem] relative">
-                        <div
-                          class="absolute top-[0rem] left-[0rem] rounded-[50%] bg-darkslateblue-100 w-full h-full z-[1]"
-                        ></div>
-                        <div
-                          class="absolute top-[0.438rem] left-[0.188rem] tracking-[0.1em] leading-[0.988rem] font-medium inline-block w-[0.963rem] h-[0.988rem] z-[2]"
-                        >
-                          {{num}}
-                        </div>
-                      </div>
+                {% for dict in bus_dict %}
+                <div class="relative">
+                    <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+                            <tr class="">
+                                <th scope="col" class="px-6 py-10">
+                                  {% trans "Number" %}
+                                </th>
+                                <th scope="col" class="px-6 py-10">
+                                    {% trans "Bus Stop" %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            {% for number, bus_stop in dict.items %}
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                  {{number}}
+                                </th>
+                                <td class="px-6 py-4">
+                                  {{bus_stop}}
+                                </td>
+                            </tr>
+                        </tbody>
                       {% endfor %}
-                      </div>
-                    </div>
-                    <div
-                      class="mr-6 text-center flex flex-col items-center justify-start pt-[0.312rem] px-[0rem] pb-[0rem] text-black"
-                    >
-                      <div
-                        class="flex flex-col items-center justify-start gap-[3.437rem]"
-                      >
-<!--                        <div-->
-<!--                          class="flex flex-row items-start justify-end py-[0rem] pr-[0.625rem] pl-[0.687rem]"-->
-<!--                        >-->
-<!--                          <div-->
-<!--                            class="relative tracking-[0.1em] inline-block min-w-[3rem] z-[1]"-->
-<!--                          >-->
-<!--                            Seoul-->
-<!--                          </div>-->
-<!--                        </div>-->
-                        {% for bus_stop in bus_stops %}
-                          <div
-                            class="relative tracking-[0.1em] inline-block min-w-[4.313rem] z-[1]"
-                          >
-                            {{bus_stop}}
-                          </div>
-                        {% endfor %}
-                      </div>
-                    </div>
-                    <div
-                      class="ml-10 w-[2.688rem] flex flex-col items-start justify-start py-[0rem] pr-[0.812rem] pl-[0rem] box-border gap-[2.875rem]"
-                    >
-                      <div
-                        class="flex flex-col text-center items-center justify-center gap-[3.437rem]"
-                      >
-                        &nbsp;
-                      </div>
-                    </div>
-                    <div
-                      class="mr-96 flex flex-col items-start justify-start pt-[0.312rem] px-[0rem] pb-[0rem] text-black"
-                    >
-                      <div
-                        class="flex flex-col text-center items-center justify-center gap-[3.437rem]"
-                      >
-                        &nbsp;
-                      </div>
-                    </div>
-                  </div>
+                    </table>
+                </div>
+                {% endfor %}
                 </div>
               </div>
             </div>
@@ -236,40 +193,6 @@
         </footer>
       </section>
     </div>
-    <script>
-    function addMessageToRegion(message) {
-      const add_messageElement = document.querySelector('.add-message');
-
-      // 새로운 'self-stretch' div 요소를 생성합니다.
-      var newParentElement = document.createElement('div');
-      newParentElement.className = 'self-stretch flex flex-row items-start justify-start relative max-w-full';
-
-      // 새로운 'flex-1' div 요소를 생성합니다.
-      var newChildElement1 = document.createElement('div');
-      newChildElement1.className = 'flex-1 rounded-mini bg-white flex flex-row items-start justify-start py-[1rem] pr-[1.062rem] pl-[1.625rem] box-border max-w-full';
-
-      // 'h-[5rem]' div 요소를 생성합니다.
-      var newChildElement2 = document.createElement('div');
-      newChildElement2.className = 'h-[5rem] w-[25rem] relative rounded-mini bg-white hidden max-w-full';
-
-      // 'w-[22.313rem]' div 요소를 생성합니다.
-      var newChildElement3 = document.createElement('div');
-      newChildElement3.className = 'w-[22.313rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]';
-
-      // 메시지를 포함하는 'p' 요소를 생성합니다.
-      var newMessageElement = document.createElement('p');
-      newMessageElement.className = 'm-0';
-      newMessageElement.style.textAlign = 'center';
-      newMessageElement.textContent = message;  // 메시지로 대체합니다.
-
-      // 생성한 요소들을 적절한 위치에 추가합니다.
-      newChildElement3.appendChild(newMessageElement);
-      newChildElement1.appendChild(newChildElement2);
-      newChildElement1.appendChild(newChildElement3);
-      newParentElement.appendChild(newChildElement1);
-      add_messageElement.appendChild(newParentElement);
-    }
-    </script>
     <script src="{% static 'js/ml.js' %}"></script>
     <script src="{% static 'js/socket.js' %}"></script>
   </body>
