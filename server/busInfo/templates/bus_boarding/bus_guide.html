@@ -1,95 +1,16 @@
-{% load static %}
+{% extends "base_question.html" %}
 {% load i18n %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <link rel="stylesheet" href="{% static 'css/one/slide-.css' %}" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    />
-    <title>승차장 정보</title>
-  </head>
-  <body>
-    <div class="slide-3">
-      <div class="bus-stop-guidance">
-        <div class="image-container">
-          <div class="boarding-info">
-            <img
-              class="image-8-icon2"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/image-9@2x.png' %}"
-            />
-          </div>
-          <div class="boarding-instructions add-message">
-            <div class="map-instructions">
-              <div class="rectangle-parent6">
-                <div class="frame-child9"></div>
-                <div class="please-board-the">{% trans "The map will close after 30s" %}</div>
-              </div>
-            </div>
-            <div class="map-instructions">
-              <div class="rectangle-parent6">
-                <div class="frame-child9"></div>
-                <div class="please-board-the">
-                  <div class="new-message">
-                    &nbsp;
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section class="rectangle-parent9 gap-[7.7rem]">
-        <div class="frame-child12"></div>
-        <header class="map-and-image">
-          <div class="image-26-parent">
-            <img
-              class="image-26-icon"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/image-26@2x.png' %}"
-            />
 
-            <h3 class="bus-stop-map">{% trans "Bus stop map" %}</h3>
-          </div>
-          <div class="image-27-wrapper">
-            <img
-              class="image-27-icon"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/image-27@2x.png' %}"
-            />
-          </div>
-        </header>
-        <footer class="feedback-prompt1">
-          <div class="prompt-container">
-            <img
-              class="prompt-container-child"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/group-21@2x.png' %}"
-            />
+{% block title %}
+승차장 정보
+{% endblock %}
 
-            <div class="if-the-sentence-displayed-on-t-container">
-              <div class="if-the-sentence-container3">
-                <p class="if-the-sentence3">
-                  {% trans "If the sentence displayed on the screen was not what you intended," %}
-                </p>
-                <p class="look-at-the3">
-                  {% trans "look at the camera and use the sign word 'again'." %}
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </section>
-    </div>
-    <script src="{% static 'js/ml.js' %}"></script>
-    <script src="{% static 'js/socket.js' %}"></script>
-  </body>
-</html>
+{% block message %}
+<div class="mt-2 flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-primary-foreground hover:bg-primary/90 px-4 py-2 w-full text-break" style="height: auto;">
+    {% trans "The map will close after 30s" %}
+</div>
+{% endblock %}
+
+{% block video_content %}
+    <img src="{% static 'image/zh-boarding.png' %}" class="position-absolute top-0 start-0 w-100 h-100" alt="Image">
+{% endblock video_content %}

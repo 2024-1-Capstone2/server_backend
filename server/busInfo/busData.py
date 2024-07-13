@@ -1,28 +1,6 @@
 import requests
-import pprint
-import json
-from django.utils import timezone
-import datetime
 from .models import Bus, BusStop, TimeTable, City, District
-from django.db.models import Count
-# City, District
 
-def test():
-    # city = City.objects.all()
-    # print("city")
-    # print(city)
-    # district = District.objects.all()
-    # print("district")
-    # print(district)
-    bus = Bus.objects.get(number='6009')
-    print("bus")
-    print(f"버스 번호: {bus.number}, 지역: {bus.area}, 요금: {bus.fare}, 회사: {bus.company}")
-    # time_table = TimeTable.objects.filter(bus=bus)
-    # for timetable in time_table:
-    #     print(f"출발 버스 정류장: {timetable.departure_bus_stop.name}, 도착 버스 정류장: {timetable.arrival_bus_stop.name}, 시간: {timetable.time}")
-    # bus_stops = BusStop.objects.all()
-    # print("bus_stops")
-    # print(bus_stops)
 
 def addDistrict():
     districts_english = ['Gangnam-gu', 'Nowon-gu', 'Gangseo-gu', 'Guro-gu', 'Mapo-gu', 'Jongno-gu', 'Jung-gu',
@@ -153,17 +131,3 @@ def getBusInfo():
             bus.area = area_dict[bus_area]
             bus.company = bus_company
             bus.save()
-
-            # for time_str in item['t1wdayt'].split(', '):
-            #     try:
-            #         departure_time = datetime.datetime.strptime(time_str, '%H%M').time()
-            #     except ValueError:
-            #         continue  # 잘못된 시간 형식인 경우 건너뛰기
-            #
-            #     # TimeTable 인스턴스 생성 및 저장
-            #     TimeTable.objects.get_or_create(
-            #         bus=bus,
-            #         departure_bus_stop=BusStop.objects.get(name='인천공항1터미널'),
-            #         arrival_bus_stop=BusStop.objects.get(name='Sinsa Station'),
-            #         time=departure_time
-            #     )

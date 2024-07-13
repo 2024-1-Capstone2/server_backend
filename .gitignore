@@ -10,3 +10,5 @@ server/handML/model/model_asl.keras:Zone.Identifier
 pyvenv.cfg
 server/*Zone.Identifier
 server/*Zone.Identifier
+server/secrets.json
+server/static

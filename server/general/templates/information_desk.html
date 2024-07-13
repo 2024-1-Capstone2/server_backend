@@ -1,91 +1,16 @@
-{% load static %}
+{% extends "base_question.html" %}
 {% load i18n %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
 
-    <link rel="stylesheet" href="{% static 'css/one/slide-2.css' %}" />
+{% block title %}
+질문
+{% endblock %}
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
+{% block message %}
+<div class="mt-2 flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-primary-foreground hover:bg-primary/90 px-4 py-2 w-full text-break" style="height: auto;">
+    {% trans "Please contact a counselor" %}
+</div>
+{% endblock %}
 
-    <script src="{% static 'js/config.js' %}"></script>
-  </head>
-  <body>
-    <div class="slide-2">
-      <div class="slide-container1 ">
-        <div class="deaf-info-top">
-          <div class="deaf-info-container">
-            <img
-              class="image-8-icon1"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/image-9@2x.png' %}"
-            />
-          </div>
-          <div class="frame-parent5">
-            <div class="rectangle-parent5" style="justify-content: center">
-              <div class="frame-child8"></div>
-              <div class="the-screen-will">{% trans "The screen will close after 15s" %}</div>
-            </div>
-          </div>
-          <div class="frame-parent5">
-            <div class="rectangle-parent5" style="justify-content: center">
-              <div class="frame-child8"></div>
-              <div class="the-screen-will">
-                <div class="text-xs text-center items-center new-message">&nbsp;
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section class="sentence-check-top">
-        <div class="sentence-check-top-child"></div>
-        <div class="sentence-check-container">
-          <div class="sentence-check-content">
-            <div class="sentence-check-content-child"></div>
-            <div class="b1">B1</div>
-          </div>
-          <div class="info-desk-label">
-            <h2 class="information-desk">{% trans "Information Desk" %}</h2>
-          </div>
-        </div>
-        <img
-          class="sentence-check-top-item"
-          loading="lazy"
-          alt=""
-          src="{% static 'image/one/rectangle-10@2x.png' %}"
-        />
-        {% get_current_language as LANGUAGE_CODE %}
-        <footer class="feedback-prompt">
-
-          <div class="{% if LANGUAGE_CODE == 'en' %}feedback-container{% elif LANGUAGE_CODE == 'zh-hans' %}feedback-container2{% endif %}">
-            <img
-              class="feedback-container-child"
-              loading="lazy"
-              alt=""
-              src="{% static 'image/one/group-21@2x.png' %}"
-            />
-            <div class="if-the-sentence-displayed-on-t-wrapper">
-              <div class="if-the-sentence-container2">
-                <p class="if-the-sentence2">
-                  {% trans "If the sentence displayed on the screen was not what you intended," %}
-                </p>
-                <p class="look-at-the2">
-                  {% trans "look at the camera and use the sign word 'again'." %}
-                </p>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </section>
-    </div>
-    <script src="{% static 'js/socket.js' %}"></script>
-  </body>
-</html>
+{% block video_content %}
+    <img src="{% static 'image/map.png' %}" class="position-absolute top-0 start-0 w-100 h-100" alt="Image">
+{% endblock video_content %}

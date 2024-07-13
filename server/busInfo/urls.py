@@ -1,23 +1,22 @@
 from django.urls import path
 
-from . import views
+from .views.api import rest_views
+from .views.ssr import ssr_views
 
 urlpatterns = [
-    path('', views.index),
-    path('bus/', views.crawl_and_save_bus_info, name='crawl_and_save_bus_info'),
+
+    # crawling
+    path('bus/', ssr_views.crawl_and_save_bus_info, name='crawl_and_save_bus_info'),
 
     # rest
-    path('requestBusScheduleRequest', views.request_bus_schedule_request, name='request_bus_schedule_request'),
-    path('requestBusGuide', views.request_bus_guide, name='request_bus_guide'),
-    path('requestBusSchedule', views.request_bus_schedule, name='request_bus_schedule'),
-    path('requestBusBoarding', views.request_bus_boarding, name='request_bus_boarding'),
+    path('api/scheduleNum', rest_views.request_bus_schedule_request, name='request_bus_schedule_request'),
+    path('api/schedule', rest_views.request_bus_schedule, name='request_bus_schedule'),
+    path('api/gate', rest_views.request_bus_guide, name='request_bus_guide'),
+    path('api/boardingId', rest_views.request_bus_boarding, name='request_bus_boarding'),
 
     # render
-    path('busScheduleRequest', views.bus_schedule_request, name='bus_schedule_request'),
-    path('busGuide', views.bus_guide, name='bus_guide'),
-    path('busSchedule', views.bus_schedule, name='bus_schedule'),
-    path('busBoarding', views.bus_boarding, name='bus_boarding'),
-
-    path('temp', views.temp, name='temp'),
-    path('temp1', views.temp1, name='temp1'),
+    path('schedule_number', ssr_views.bus_schedule_request, name='bus_schedule_request'),
+    path('gate', ssr_views.bus_gate, name='bus_gate'),
+    path('schedule', ssr_views.bus_schedule, name='bus_schedule'),
+    path('boardingId', ssr_views.bus_boarding, name='bus_boarding'),
 ]

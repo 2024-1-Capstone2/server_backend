@@ -126,12 +126,6 @@
               <div
                 class="flex flex-row items-start justify-start gap-[2.062rem] max-w-full mq750:flex-wrap mq450:gap-[1rem]"
               >
-                <img
-                  class="h-[5rem] w-[5rem] relative object-cover z-[1]"
-                  loading="lazy"
-                  alt=""
-                  src="{% static 'image/one/group-5@2x.png' %}"
-                />
 
                 <div
                   class="flex flex-col items-start justify-start pt-[1.187rem] px-[0rem] pb-[0rem]"
@@ -139,7 +133,8 @@
                   <h1
                     class="m-0 relative text-inherit tracking-[0.1em] font-medium font-inherit z-[1] mq750:text-[1.75rem] mq450:text-[1.313rem]"
                   >
-                    {% trans "Bus schedule" %}
+{#                    {% trans "Bus schedule" %}#}
+                      Passengers
                   </h1>
                 </div>
               </div>
@@ -229,16 +224,7 @@
                   {% trans "Bus class" %}
                 </div>
               </div>
-              <div
-                class="relative tracking-[0.1em] inline-block min-w-[5.688rem] z-[2]"
-              >
-                {% trans "Total seats" %}
-              </div>
-              <div
-                class="w-[11.875rem] relative tracking-[0.1em] inline-block shrink-0 z-[2]"
-              >
-                <p class="m-0">{% trans "Remaining seats" %}</p>
-              </div>
+
             </div>
             <div
               class="self-stretch bg-white flex flex-row items-start justify-between pt-[0.937rem] pb-[1.062rem] pr-[5rem] pl-[5.937rem] box-border max-w-full gap-[1.25rem] z-[1] mq750:pl-[1.438rem] mq750:box-border mq1100:flex-wrap mq1100:pl-[2.938rem] mq1100:pr-[2.5rem] mq1100:box-border"
@@ -263,16 +249,6 @@
                 >
                   {% trans "Excellent Bus" %}
                 </div>
-              </div>
-              <div
-                class="relative items-center justify-center tracking-[0.1em] inline-block min-w-[5.688rem] z-[2]"
-              >
-                {{total_seats}}
-              </div>
-              <div
-                class="w-[11.875rem] items-center justify-center relative tracking-[0.1em] inline-block shrink-0 z-[2]"
-              >
-                <p class="m-0">{{remaining_seats}}</p>
               </div>
             </div>
           </div>

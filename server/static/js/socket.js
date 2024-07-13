@@ -9,8 +9,12 @@
         const type = data.message_type;
         const message = data.message;
 
+        console.log(type);
+        console.log(message);
+
         if(type === 'recognized_actions'){
             const detectActionElement = document.querySelector('.detect_action');
+            console.log(message)
             detectActionElement.textContent = message;
             detectActionElement.classList.add('text-xs');
         }

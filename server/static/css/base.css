@@ -1,0 +1,22 @@
+.h-15{
+    height: 3.75rem;
+}
+.canvas {
+    z-index: 1;
+    pointer-events: none;
+}
+video {
+    clear: both;
+    display: block;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}
+.output_canvas {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+}

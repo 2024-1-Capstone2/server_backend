@@ -25,5 +25,5 @@ urlpatterns = [
     path('refund/', include('refund.urls')),
     path('multiLanguage/', include('multiLanguage.urls')),
     path('ticket/', include('ticket.urls')),
-    path('general/', include('general.urls'))
+    path('general/', include('general.urls')),
 ]

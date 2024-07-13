@@ -16,7 +16,7 @@ def request_ticket(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('refund/')
+                'message': str('refund/ticket')
             }
     )
 
@@ -45,8 +45,7 @@ def request_question(request):
 
 def ticket(request):
     translation.activate(settings.LANGUAGE_CODE)
-    language_code = settings.LANGUAGE_CODE
-    return render(request, 'refund_request_ticket.html', {'language_code': language_code})
+    return render(request, 'refund_request_ticket.html')
 
 def question(request):
     translation.activate(settings.LANGUAGE_CODE)

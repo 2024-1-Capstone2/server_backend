@@ -1,111 +1,56 @@
+import logging
 from tensorflow.keras.models import load_model
 import numpy as np
 from django.conf import settings
+from collections import deque
+from django.utils import timezone
+import threading, time
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
-# 미국 수어 단어 리스트
+
+def create_action_list(base_words, numbers=True, alphabet=True, additional_words=None):
+    action_list = base_words.copy()
+    if numbers:
+        action_list.extend([str(i) for i in range(10)])
+    if alphabet:
+        action_list.extend(['A', 'N'])
+    if additional_words:
+        action_list.extend(additional_words)
+    return action_list
+
 actions_dict = {
-    'actions_asl': [
-        # 기본 단어
-        'departures', 'bus', 'next', 'time',
-        'last', 'first', 'take(bus)', 'arrivals',
-        'ticket', 'where', 'purchase', 'when',
-        'how_much', 'how_many', 'this', 'timetable',
-        'earliest', 'take(time)', 'adult', 'child',
-        'student', 'seat', 'alone', 'together',
-        'baggage', 'what', 'refund', 'miss',
-        'new', 'gate', 'late_night',
+    'actions_asl': create_action_list([
+        'departures', 'bus', 'next', 'time', 'last', 'first', 'take(bus)', 'arrivals',
+        'ticket', 'where', 'purchase', 'when', 'how_much', 'how_many', 'this', 'timetable',
+        'earliest', 'take(time)', 'adult', 'child', 'student', 'seat', 'alone', 'together',
+        'baggage', 'what', 'refund', 'miss', 'new', 'gate', 'late_night'
+    ], additional_words=['retry', 'yes', 'no', 'change']),
 
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
+    'actions_asl_num': create_action_list(['retry', 'yes', 'no']),
 
-        # 알파벳
-        'A', 'N',
+    'actions_asl_headcnt': create_action_list(
+        ['retry', 'yes', 'no'], additional_words=['adult', 'child', 'student']
+    ),
 
-        # 추가 단어
-        'retry', 'yes', 'no', 'change',
-    ],
+    'actions_asl_yesorno': ['retry', 'yes', 'no'],
 
-    'actions_asl_num': [
-        # 기본 단어
-        'retry', 'yes', 'no',
+    'actions_csl': create_action_list([
+        '买票', '什么时候', '哪里', '时候', '尾班车', '头班车', '乘搭', '度过',
+        '目的地', '出发地', '巴士', '下一班车', '多少', '时间表', '这', '走',
+        '成年', '孩子', '学生', '座位', '单独', '一起', '行李', '什么',
+        '退钱', '错过', '新的', '怎么', '夜'
+    ], additional_words=['重试', '是', '不是']),
 
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
+    'actions_csl_num': create_action_list(['重试', '是', '不是']),
 
-        # 알파벳
-        'A', 'N',
-    ],
+    'actions_csl_headcnt': create_action_list(
+        ['重试', '是', '不是'], additional_words=['成年', '孩子', '学生']
+    ),
 
-    'actions_asl_headcnt': [
-        # 기본 단어
-        'retry', 'yes', 'no',
-
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
-
-        # 인원 종류
-        'adult', 'child', 'student',
-    ],
-
-    'actions_asl_yesorno': [
-        'retry', 'yes', 'no',
-    ],
-
-    # 중국 수어 단어 리스트
-
-    'actions_csl': [
-        # 기본 단어
-        '买票', '什么时候', '哪里', '时候',
-        '尾班车', '头班车', '乘搭', '度过',
-        '目的地', '出发地', '巴士', '下一班车',
-        '多少', '时间表', '这', '走',
-        '成年', '孩子', '学生', '座位',
-        '单独', '一起', '行李', '什么',
-        '退钱', '错过', '新的', '怎么',
-        '夜',
-
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
-
-        # 알파벳
-        'A', 'N',
-
-        # 추가 단어
-        '重试', '是', '不是',
-    ],
-
-    'actions_csl_num':  [
-        # 기본 단어
-        '重试', '是', '不是',
-
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
-
-        # 알파벳
-        'A', 'N',
-    ],
-
-    'actions_csl_headcnt': [
-        # 기본 단어
-        '重试', '是', '不是',
-
-        # 숫자
-        '0', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9',
-
-        # 인원 종류
-        '成年', '孩子', '学生',
-    ],
-
-    'actions_csl_yesorno':  [
-        '重试', '是', '不是',
-    ],
+    'actions_csl_yesorno': ['重试', '是', '不是'],
 }
+
 seq_length = 30
 
 # 모델
@@ -120,99 +65,145 @@ models = {
     'csl_yesorno': load_model(settings.MODEL_PATH_CSL_YESORNO),
 }
 
-seq = []
-action_seq = []
 # 현재 사용하는 모델 로드하는 변수
 current_model = None
 actions = None
 this_action = None
 
+
 def load_model_by_name(origin):
     global current_model
     global actions
 
-    if settings.LANGUAGE_CODE == 'en':
-        lang_code = 'asl'
-    else:
-        lang_code = 'csl'
+    lang_code = 'asl' if settings.LANGUAGE_CODE == 'en' else 'csl'
 
-    name = None
-    if 'busInfo' in origin:
-        name = f'{lang_code}_num'
-    elif 'refund' in origin:
-        if 'question' in origin:
-            name = f'{lang_code}'
-        else :
-            name = f'{lang_code}_yesorno'
-    elif 'multiLanguage' in origin:
-        name = f'{lang_code}_num'
-    elif 'general' in origin:
-        name = f'{lang_code}'
-    elif 'ticket' in origin:
-        if 'select' in origin:
-            name = f'{lang_code}_num'
-        elif 'busInfoSchedule' in origin:
-            name = f'{lang_code}_num'
-        elif 'number' in origin:
-            name = f'{lang_code}_headcnt'
-        else:
-            name = f'{lang_code}_yesorno'
-    # 모델, action 리스트 로드
+    origin_to_name_suffix = {
+        'busInfo': '_num',
+        'refund': '_yesorno' if 'question' not in origin else '',
+        'multiLanguage': '_num',
+        'general': '',
+        'ticket': '_num' if 'select' in origin or 'busInfoSchedule' in origin else '_headcnt' if 'number' in origin else '_yesorno',
+    }
+
+    name_suffix = next((suffix for key, suffix in origin_to_name_suffix.items() if key in origin), '')
+
+    name = f'{lang_code}{name_suffix}'
+
+    logging.log(logging.INFO, f"Model name: {name}")
+
     current_model = models[name]
-    current_model.summary()
     actions = actions_dict[f'actions_{name}']
+    ActionDetector.get_instance().update_model(current_model, actions)
 
-def detect_action(hand_data):
+class ActionDetector:
+    _instance = None
+    _lock = threading.Lock()
 
-    try:
-        hand_id = hand_data['handId']
-        landmarks = (hand_data["landmarks"])
-    except (KeyError, TypeError):
-        print(f"Invalid hand data format: {hand_data}")
-        return None
+    def __new__(cls):
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(ActionDetector, cls).__new__(cls)
+                    cls._instance.init()
+        return cls._instance
 
-    joint = np.zeros((21, 3))
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super(ActionDetector, cls).__new__(cls)
+                    cls._instance.init()
+        return cls._instance
 
-    for j, lm in enumerate(landmarks):
-        joint[j] = [lm['x'], lm['y'], lm['z']]
+    def update_model(self, model, actions):
+        self.current_model = model
+        self.actions = actions
 
-    # 관절 간의 벡터값 구하기
-    v1 = joint[[0,1,2,3,0,5,6,7,0,9,10,11,0,13,14,15,0,17,18,19], :] # 부모 관절
-    v2 = joint[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], :] # 자식 관절
-    v = v2 - v1 # [20, 3]
-    # 벡터값 일반화하기
-    v = v / np.linalg.norm(v, axis=1)[:, np.newaxis]
+    def init(self):
+        self.seq = deque(maxlen=10)
+        self.recent_actions = deque(maxlen=10)
+        self.DUPLICATE_THRESHOLD = 2
+        self.current_model = current_model
+        self.actions = actions
+        self.last_action_time = None  # 마지막 동작 감지 시간을 저장
 
-    # 각도값 구하기
-    angle = np.arccos(np.einsum('nt,nt->n',
-    v[[0,1,2,4,5,6,8,9,10,12,13,14,16,17,18],:],
-        v[[1,2,3,5,6,7,9,10,11,13,14,15,17,18,19],:])) # [15,]
 
-    angle = np.degrees(angle) # 각도 단위 변환
+    def action_cleaner(self):
+        self.seq.clear()
+        self.recent_actions.clear()
 
-    d = np.concatenate([joint.flatten(), angle])
 
-    # 손 인덱스에 따라 적절한 리스트에 데이터를 추가
-    seq.append(d)
+    def detect_action(self, landmarks):
+        with self._lock:
+            if len(landmarks) < 21:
+                print("Not enough landmarks")
+                return None
 
-    if len(seq) < seq_length:
-        return None
+            joint = np.array([[lm['x'], lm['y'], lm['z']] for lm in landmarks])
 
-    # 위에서 구한 각도값으로 input 데이터 생성
-    input_data = np.expand_dims(np.array(seq[-seq_length:], dtype=np.float32), axis=0)
+            v1 = joint[[0,1,2,3,0,5,6,7,0,9,10,11,0,13,14,15,0,17,18,19], :]
+            v2 = joint[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], :]
+            v = v2 - v1
+            v = v / np.linalg.norm(v, axis=1)[:, np.newaxis]
 
-    # input 데이터로 예측값 구하기, verbose 옵션으로 진행바 로그 관리
+            angle = np.arccos(np.einsum('nt,nt->n',
+            v[[0,1,2,4,5,6,8,9,10,12,13,14,16,17,18],:],
+                v[[1,2,3,5,6,7,9,10,11,13,14,15,17,18,19],:]))
 
-    y_pred = current_model.predict(input_data, verbose = 0).squeeze()
+            angle = np.degrees(angle)
 
-    i_pred = int(np.argmax(y_pred))
-    conf = y_pred[i_pred]
+            d = np.concatenate([joint.flatten(), angle])
 
-    # 예측값의 신뢰도(confidence)가 0.9 미만이라면 동작 다시 인식하는 부분 안내원에게 알리기?
-    if conf < 0.9:
-        return None
+            self.seq.append(d)
 
-    # 예측값의 신뢰도(confidence)가 0.9 이상이라면 동작들을 저장
-    action = actions[i_pred]
+            if len(self.seq) < 3:
+                return None
 
-    return action
+            input_data = np.expand_dims(np.array(list(self.seq), dtype=np.float32), axis=0)
+
+            y_pred = self.current_model.predict(input_data, verbose=0).squeeze()
+
+            i_pred = int(np.argmax(y_pred))
+            conf = y_pred[i_pred]
+
+            if conf < 0.9:
+                return None
+
+            action = self.actions[i_pred]
+
+            # 중복 검사
+            current_time = timezone.now()
+
+            is_duplicate = False
+            if self.last_action_time is not None:
+                if (current_time - self.last_action_time).total_seconds() < self.DUPLICATE_THRESHOLD:
+                    is_duplicate = True
+
+            if not is_duplicate:
+                self.recent_actions.append((action, current_time))
+                actions_only = [action for action, _ in self.recent_actions]
+                self.last_action_time = current_time
+                self.seq.clear()
+                channel_layer = get_channel_layer()
+                async def async_group_send():
+                    await channel_layer.group_send(
+                        'javaScript_group',
+                        {
+                            'type': 'javaScript_message',
+                            'message_type': 'recognized_actions',
+                            'message': str(actions_only)
+                        }
+                    )
+                    await channel_layer.group_send(
+                        'flutter_group',
+                        {
+                            'type': 'flutter_message',
+                            'message_type': 'recognized_actions',
+                            'message': str(actions_only)
+                        }
+                    )
+
+                async_to_sync(async_group_send)()
+
+            return None

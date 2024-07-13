@@ -17,8 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
-
-          <style>
+      <style>
       #video{
         display: none;
       }
@@ -73,7 +72,7 @@
                 class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
               >
                 <div class="text-xs text-center items-center new-message">
-                  &nbsp;
+
                 </div>
               </div>
             </div>
@@ -92,7 +91,7 @@
                 class="text-center w-[19.5rem] relative tracking-[0.1em] inline-block z-[1] mq450:text-[1rem]"
               >
                 <div class="detect_action text-base">
-                  &nbsp;
+                  &nbsp;&nbsp;
                 </div>
               </div>
             </div>
@@ -167,13 +166,13 @@
                                   {% trans "Bus number" %}
                                 </th>
                                 <th scope="col" class="w-[15rem] h-[4rem]">
-                                    {% trans "Arrival time" %}
+                                    {% trans "Departure" %}
                                 </th>
                                 <th scope="col" class="w-[15rem] h-[4rem]">
-                                      {% trans "Departure" %}
+                                      {% trans "Arrival area" %}
                                 </th>
                                 <th scope="col" class="w-[15rem] h-[4rem]">
-                                      {% trans "Seat number" %}
+                                      {% trans "Bus stop" %}
                                   </th>
                             </tr>
                         </thead>
@@ -186,10 +185,10 @@
                                   {{first_time}}
                                 </td>
                                 <td class="px-6 py-4">
-                                  {{departure}}
+                                    Seoul
                                 </td>
                                 <td class="px-6 py-4">
-                                  {{seat_number}}
+                                  1F : 4A
                                 </td>
                             </tr>
                         </tbody>

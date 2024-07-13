@@ -34,6 +34,10 @@ MODEL_PATH_CSL_HEADCNT = os.path.join(BASE_DIR, 'handML/model', 'model_csl_headc
 MODEL_PATH_CSL_NUM = os.path.join(BASE_DIR, 'handML/model', 'model_csl_num.keras')
 MODEL_PATH_CSL_YESORNO = os.path.join(BASE_DIR, 'handML/model', 'model_csl_yesorno.keras')
 
+# opencv cam origin 설정
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
 # 번역 키
 secret_file = os.path.join(BASE_DIR, 'secrets.json')
 
@@ -90,7 +94,6 @@ INSTALLED_APPS = [
     'multiLanguage.apps.LanguageConfig',
     'ticket.apps.TicketConfig',
     'general.apps.GeneralConfig',
-    'video_stream.apps.VideoStreamConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +113,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [Path(BASE_DIR) / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -202,13 +205,13 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console'],
-        'level': 'INFO',
+        'level': 'WARNING',
     },
     'loggers': {
         'django.server': {
             'handlers': ['console'],
-            'level': 'WARNING',  # Change this line
-            'propagate': True,
+            'level': 'INFO',  # Change this line
+            'propagate': False,
         },
     },
 }
