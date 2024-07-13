@@ -14,7 +14,7 @@
 
 ## 프로젝트 구조
 
-
+![img](https://github.com/user-attachments/assets/5677c705-5570-4ba3-b02e-697a0a0ebecb)
 
 ##  주요 기능
 
