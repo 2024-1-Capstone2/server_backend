@@ -2,6 +2,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from config.utils import get_recognition_result, RecognitionResultSerializer
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -15,12 +16,15 @@ def request_select_region(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/selectRegion')
+                'message': str('ticket/region')
             }
     )
 
+    result = get_recognition_result('ticket/region')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_select_small_region(request):
@@ -31,13 +35,15 @@ def request_select_small_region(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/selectSmallRegion')
+                'message': str('ticket/small-region')
             }
     )
-
+    result = get_recognition_result('ticket/small-region')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
 
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_select_bus_stop(request):
@@ -48,13 +54,15 @@ def request_select_bus_stop(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/selectBusStop')
+                'message': str('ticket/bus-stop')
             }
     )
-
+    result = get_recognition_result('ticket/bus-stop')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
 
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_bus_info(request):
@@ -65,13 +73,15 @@ def request_bus_info(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/busInfo')
+                'message': str('ticket/bus')
             }
     )
-
+    result = get_recognition_result('ticket/bus')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
 
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_bus_info_schedule(request):
@@ -82,14 +92,15 @@ def request_bus_info_schedule(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/busInfoSchedule')
+                'message': str('ticket/schedule')
             }
     )
-
+    result = get_recognition_result('ticket/schedule')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
 
-
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_number_of_people(request):
@@ -100,13 +111,15 @@ def request_number_of_people(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('ticket/numberOfPeople')
+                'message': str('ticket/cnt')
             }
     )
-
+    result = get_recognition_result('ticket/cnt')
+    serializer = RecognitionResultSerializer(data={"response": result})
+    serializer.is_valid(raise_exception=True)
     async_to_sync(async_group_send)()
 
-    return Response(status=200)
+    return Response(status=200, data=serializer.data)
 
 @api_view(['GET'])
 def request_purchase_info(request):

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from server.config.schema import schema_view
 
 # handML 경로의 요청은 handML/urls.py에 적힌 곳으로 매핑한다.
 
@@ -26,4 +27,7 @@ urlpatterns = [
     path('multiLanguage/', include('multiLanguage.urls')),
     path('ticket/', include('ticket.urls')),
     path('general/', include('general.urls')),
+
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc-ui'),
 ]

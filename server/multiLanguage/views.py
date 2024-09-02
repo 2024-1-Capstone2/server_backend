@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from django.conf import settings
+from config.utils import get_recognition_result, RecognitionResultSerializer
 
 @api_view(['GET'])
 def request_choice_language(request):
@@ -15,7 +16,7 @@ def request_choice_language(request):
             {
                 'type': 'javaScript_message',
                 'message_type': 'url_move',
-                'message': str('multiLanguage/choiceLanguage')
+                'message': str('multiLanguage/choice')
             }
     )
 

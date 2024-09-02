@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'multiLanguage.apps.LanguageConfig',
     'ticket.apps.TicketConfig',
     'general.apps.GeneralConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # rest
-    path('choice', views.request_choice_language, name='request_choice_language'),
+    path('api/choice', views.request_choice_language, name='request_choice_language'),
     # render
-    path('choiceLanguage', views.choice_language, name='choice_language'),
+    path('choice', views.choice_language, name='choice_language'),
 ]
